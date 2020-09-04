@@ -12,7 +12,7 @@ YOUR_CHANNEL_ACCESS_TOKEN = "21MB2pzMrEs0JNqAdPTPyxFJmnaljipr9bLiUuMJrPWaLeCPHmK
 YOUR_CHANNEL_SECRET = "b392c7fd703eba783a31c2c6cb80a890"
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
-FQDN = "https://project-hagi.herokuapp.com"
+FQDN = "https://team-hagi-project.herokuapp.com"
 
 
 @app.route("/callback", methods=["POST"])
