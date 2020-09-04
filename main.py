@@ -1,9 +1,6 @@
-  
 import os
 import random
-
 from pathlib import Path
-
 from flask import Flask, abort, request
 from linebot import (
    LineBotApi, WebhookHandler
@@ -12,7 +9,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 import cv2
-#hagiwara
+#hagihira
 
 
 
