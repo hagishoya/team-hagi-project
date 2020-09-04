@@ -1,3 +1,4 @@
+  
 import os
 import random
 
@@ -12,7 +13,7 @@ from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage)
 import cv2
 #hagiwara
-#aaaaaaaaaa
+
 
 
 
