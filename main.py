@@ -27,6 +27,7 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 flexmsg = {
+
   "type": "template",
   "altText": "this is a carousel template",
   "template": {
@@ -68,7 +69,6 @@ flexmsg = {
     ]
   }
 }
-
 
 @app.route("/")
 def hello_world():
