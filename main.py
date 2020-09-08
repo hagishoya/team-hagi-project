@@ -99,35 +99,25 @@ def handle_message(event):
     number =  random.randint(0,3)
     container_obj = FlexSendMessage.new_from_json_dict(flexmsg)
     if number == 0:
-        line_bot_api.push_message(
+        line_bot_api.reply_message(
         event.reply_token,
         messages=container_obj)
-        # line_bot_api.reply_message(
-        # event.reply_token,
-        # TextSendMessage(text="大吉")
-        #)
+        #TextSendMessage(text="大吉"))
     elif number == 1:
-        line_bot_api.push_message(
+        line_bot_api.reply_message(
         event.reply_token,
         messages=container_obj)
-        # line_bot_api.reply_message(
-        # event.reply_token,
-        # TextSendMessage(text="中吉")
-        #)
+        #TextSendMessage(text="中吉"))
     elif number == 2:
-        line_bot_api.push_message(
+        line_bot_api.reply_message(
         event.reply_token,
-        messages=container_obj)    
-        # line_bot_api.reply_message(
-        # event.reply_token,
+        messages=container_obj)
         # TextSendMessage(text="吉")
         #)
     else:
-        line_bot_api.push_message(
+        line_bot_api.reply_message(
         event.reply_token,
         messages=container_obj)
-        # line_bot_api.reply_message(
-        # event.reply_token,
         # TextSendMessage(text="凶")
         #)
     
