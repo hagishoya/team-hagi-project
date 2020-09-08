@@ -7,7 +7,7 @@ from linebot import (
 )
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
-                            TextMessage, TextSendMessage)
+                            TextMessage, TextSendMessage, FlexSendMessage)
 import cv2
 #hagihira
 
@@ -26,9 +26,49 @@ YOUR_CHANNEL_SECRET = "b392c7fd703eba783a31c2c6cb80a890"
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-#SRC_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}.jpg"
-#MAIN_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_main.jpg"
-#PREVIEW_IMAGE_PATH = "https://secret-lake-56663.herokuapp.com/static/{}_preview.jpg"
+flexmsg = {
+  "type": "template",
+  "altText": "this is a carousel template",
+  "template": {
+    "type": "carousel",
+    "actions": [],
+    "columns": [
+      {
+        "thumbnailImageUrl": "https://ggo.ismcdn.jp/mwimgs/8/6/-/img_864fe01106d99315535924b60c6764ad707281.jpg",
+        "text": "おめめ",
+        "actions": [
+          {
+            "type": "message",
+            "label": "色を変える",
+            "text": "色を変える"
+          },
+          {
+            "type": "message",
+            "label": "モザイクを入れる",
+            "text": "モザイクを入れる"
+          }
+        ]
+      },
+      {
+        "thumbnailImageUrl": "https://lh3.googleusercontent.com/pw/ACtC-3cMfvgJqbGOgx5ejw9h22l_B45lR8HusbXsm71AYGGUtW-IHqVbjve9VIvYwnNYzwhX1SEQR_5dOgJIg2SZU0zOuf6l7xpdFwadv80xcumMxxZFKvfDYyGffa51KrBKtk_9h-C1W0MXliZkZU4PqEw=w250-h282-no?authuser=0",
+        "text": "おけけ",
+        "actions": [
+          {
+            "type": "message",
+            "label": "色を変える",
+            "text": "色を変える"
+          },
+          {
+            "type": "message",
+            "label": "モザイクを入れる",
+            "text": "モザイクを入れる"
+          }
+        ]
+      }
+    ]
+  }
+}
+
 
 @app.route("/")
 def hello_world():
@@ -57,27 +97,39 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     number =  random.randint(0,3)
+    container_obj = FlexSendMessage.new_from_json_dict(flexmsg)
     if number == 0:
-        line_bot_api.reply_message(
+        line_bot_api.push_message(
         event.reply_token,
-        TextSendMessage(text="大吉")
-        #TextSendMessage(text=event.message.text)
-    )
+        messages=container_obj)
+        # line_bot_api.reply_message(
+        # event.reply_token,
+        # TextSendMessage(text="大吉")
+        #)
     elif number == 1:
-        line_bot_api.reply_message(
+        line_bot_api.push_message(
         event.reply_token,
-        TextSendMessage(text="中吉")
-    )
+        messages=container_obj)
+        # line_bot_api.reply_message(
+        # event.reply_token,
+        # TextSendMessage(text="中吉")
+        #)
     elif number == 2:
-        line_bot_api.reply_message(
+        line_bot_api.push_message(
         event.reply_token,
-        TextSendMessage(text="吉")
-    )
+        messages=container_obj)    
+        # line_bot_api.reply_message(
+        # event.reply_token,
+        # TextSendMessage(text="吉")
+        #)
     else:
-        line_bot_api.reply_message(
+        line_bot_api.push_message(
         event.reply_token,
-        TextSendMessage(text="凶")
-    )
+        messages=container_obj)
+        # line_bot_api.reply_message(
+        # event.reply_token,
+        # TextSendMessage(text="凶")
+        #)
     
     
 
