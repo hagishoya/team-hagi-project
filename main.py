@@ -8,7 +8,7 @@ from flask import Flask, abort, request
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
-                            TextMessage, TextSendMessage, FollowEvent, FlexMessage ,FlexSendMessage)
+                            TextMessage, TextSendMessage, FollowEvent, FlexSendMessage)
 #hagih
 
 
