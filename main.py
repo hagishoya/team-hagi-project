@@ -54,7 +54,7 @@ def handle_follow(event):
         saisyohaguu_message = json.load(f)
     line_bot_api.reply_message(
         event.reply_token,
-        FlexSendMessage(alt_text='最初はぐー', contents=saisyohaguu_message)
+        FlexSendMessage(alt_text='おけけ''おめめ', contents=saisyohaguu_message)
     )
 @handler.default()
 def default(event):
@@ -62,7 +62,7 @@ def default(event):
         saisyohaguu_message = json.load(f)
     line_bot_api.reply_message(
         event.reply_token,
-        FlexSendMessage(alt_text='最初はぐー', contents=saisyohaguu_message)
+        FlexSendMessage(alt_text='おけけ''おめめ', contents=saisyohaguu_message)
     )
 
 
