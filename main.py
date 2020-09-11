@@ -1,14 +1,14 @@
 import os
+import json
+import logging
 import random
+import cv2
 from pathlib import Path
 from flask import Flask, abort, request
-from linebot import (
-   LineBotApi, WebhookHandler
-)
-from linebot.exceptions import InvalidSignatureError
+from linebot import (LineBotApi, WebhookHandler)
+from linebot.exceptions import InvalidSignatureError, InvalidSignatureErrorimport
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
-                            TextMessage, TextSendMessage, FlexSendMessage)
-import cv2
+                            TextMessage, TextSendMessage, FollowEvent, FlexMessage ,FlexSendMessage)
 #hagih
 
 
@@ -26,49 +26,6 @@ YOUR_CHANNEL_SECRET = "b392c7fd703eba783a31c2c6cb80a890"
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-flexmsg = {
-
-  "type": "template",
-  "altText": "this is a carousel template",
-  "template": {
-    "type": "carousel",
-    "actions": [],
-    "columns": [
-      {
-        "thumbnailImageUrl": "https://ggo.ismcdn.jp/mwimgs/8/6/-/img_864fe01106d99315535924b60c6764ad707281.jpg",
-        "text": "おめめ",
-        "actions": [
-          {
-            "type": "message",
-            "label": "色を変える",
-            "text": "色を変える"
-          },
-          {
-            "type": "message",
-            "label": "モザイクを入れる",
-            "text": "モザイクを入れる"
-          }
-        ]
-      },
-      {
-        "thumbnailImageUrl": "https://lh3.googleusercontent.com/pw/ACtC-3cMfvgJqbGOgx5ejw9h22l_B45lR8HusbXsm71AYGGUtW-IHqVbjve9VIvYwnNYzwhX1SEQR_5dOgJIg2SZU0zOuf6l7xpdFwadv80xcumMxxZFKvfDYyGffa51KrBKtk_9h-C1W0MXliZkZU4PqEw=w250-h282-no?authuser=0",
-        "text": "おけけ",
-        "actions": [
-          {
-            "type": "message",
-            "label": "色を変える",
-            "text": "色を変える"
-          },
-          {
-            "type": "message",
-            "label": "モザイクを入れる",
-            "text": "モザイクを入れる"
-          }
-        ]
-      }
-    ]
-  }
-}
 
 @app.route("/")
 def hello_world():
@@ -92,34 +49,54 @@ def callback():
     return "OK"
 
 
+@handler.add(FollowEvent)
+def handle_follow(event):
+    with open('./flex.json') as f:
+        select_message = json.load(f)
+    line_bot_api.reply_message(
+        event.reply_token,
+        FlexSendMessage(alt_text='選択してください', contents=select_message)
+    )
+@handler.default()
+def default(event):
+    with open('./flex.json') as f:
+        select_message = json.load(f)
+    line_bot_api.reply_message(
+        event.reply_token,
+        FlexSendMessage(alt_text='選択してください', contents=select_message)
+    )
 
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    number =  random.randint(0,3)
-    container_obj = FlexSendMessage.UnmarshalFlexMessageJSON(flexmsg)
-    if number == 0:
-        line_bot_api.reply_message(
-        event.reply_token,
-        messages=container_obj)
-        #TextSendMessage(text="大吉"))
-    elif number == 1:
-        line_bot_api.reply_message(
-        event.reply_token,
-        messages=container_obj)
-        #TextSendMessage(text="中吉"))
-    elif number == 2:
-        line_bot_api.reply_message(
-        event.reply_token,
-        messages=container_obj)
-        # TextSendMessage(text="吉")
-        #)
-    else:
-        line_bot_api.reply_message(
-        event.reply_token,
-        messages=container_obj)
-        # TextSendMessage(text="凶")
-        #)
+
+
+
+
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_message(event):
+#     number =  random.randint(0,3)
+#     container_obj = FlexSendMessage.UnmarshalFlexMessageJSON(flexmsg)
+#     if number == 0:
+#         line_bot_api.reply_message(
+#         event.reply_token,
+#         messages=container_obj)
+#         #TextSendMessage(text="大吉"))
+#     elif number == 1:
+#         line_bot_api.reply_message(
+#         event.reply_token,
+#         messages=container_obj)
+#         #TextSendMessage(text="中吉"))
+#     elif number == 2:
+#         line_bot_api.reply_message(
+#         event.reply_token,
+#         messages=container_obj)
+#         # TextSendMessage(text="吉")
+#         #)
+#     else:
+#         line_bot_api.reply_message(
+#         event.reply_token,
+#         messages=container_obj)
+#         # TextSendMessage(text="凶")
+#         #)
     
     
 
