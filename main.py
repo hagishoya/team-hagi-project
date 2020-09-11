@@ -49,55 +49,10 @@ def callback():
     return "OK"
 
 
-@handler.add(FollowEvent)
-def handle_follow(event):
-    with open('./flex.json') as f:
-        select_message = json.load(f)
-    line_bot_api.reply_message(
-        event.reply_token,
-        FlexSendMessage(alt_text='選択してください', contents=select_message)
-    )
-@handler.default()
-def default(event):
-    with open('./flex.json') as f:
-        select_message = json.load(f)
-    line_bot_api.reply_message(
-        event.reply_token,
-        FlexSendMessage(alt_text='選択してください', contents=select_message)
-    )
 
 
 
-
-
-
-# @handler.add(MessageEvent, message=TextMessage)
-# def handle_message(event):
-#     number =  random.randint(0,3)
-#     container_obj = FlexSendMessage.UnmarshalFlexMessageJSON(flexmsg)
-#     if number == 0:
-#         line_bot_api.reply_message(
-#         event.reply_token,
-#         messages=container_obj)
-#         #TextSendMessage(text="大吉"))
-#     elif number == 1:
-#         line_bot_api.reply_message(
-#         event.reply_token,
-#         messages=container_obj)
-#         #TextSendMessage(text="中吉"))
-#     elif number == 2:
-#         line_bot_api.reply_message(
-#         event.reply_token,
-#         messages=container_obj)
-#         # TextSendMessage(text="吉")
-#         #)
-#     else:
-#         line_bot_api.reply_message(
-#         event.reply_token,
-#         messages=container_obj)
-#         # TextSendMessage(text="凶")
-#         #)
-    
+   
     
 
 def handle_textmessage(event):
