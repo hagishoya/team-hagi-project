@@ -1,21 +1,13 @@
-import os
-import json
-import logging
-import random
-import cv2
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import ImageMessage, ImageSendMessage, MessageEvent, TextMessage, TextSendMessage, FollowEvent, FlexSendMessage
-
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, FlexSendMessage
+import os
+import cv2
 import message_ymst as ymst
 #hagih
 
-
-
-
 app = Flask(__name__)
-
 
 face_cascade_path = "haarcascade_frontalface_default.xml"
 eye_cascade_path = "haarcascade_eye.xml"
@@ -102,6 +94,6 @@ def handle_message(event):
 #     return True
 
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+if __name__=="__main__":
+    port = int(os.getenv("PORT",5000))
     app.run(host="0.0.0.0", port=port)
