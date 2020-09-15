@@ -4,25 +4,19 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, FlexSendMessage
 import os
 import cv2
-import message_ymst as ymst
+import template.message_ymst as ymst
 #hagih
 
 app = Flask(__name__)
 
-face_cascade_path = "haarcascade_frontalface_default.xml"
-eye_cascade_path = "haarcascade_eye.xml"
+# face_cascade_path = "haarcascade_frontalface_default.xml"
+# eye_cascade_path = "haarcascade_eye.xml"
 
 YOUR_CHANNEL_ACCESS_TOKEN = "21MB2pzMrEs0JNqAdPTPyxFJmnaljipr9bLiUuMJrPWaLeCPHmK1tnqK23FoVL9kjqnpmyaJ0jFu3/KBCKl+O0WKIYzZ6lqfNEcAGaw3ag8aOwVlNzFsgmgVjiyewGsJOjnlogELVfGGTqz/PRJimwdB04t89/1O/w1cDnyilFU="
 YOUR_CHANNEL_SECRET = "b392c7fd703eba783a31c2c6cb80a890"
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
-
-
-@app.route("/")
-def hello_world():
-    return "hello world!"
-
 
 @app.route("/callback", methods=["POST"])
 def callback():
@@ -43,6 +37,10 @@ def handle_message(event):
     flex_ymst = FlexSendMessage.new_from_json_dict(ymst.get_ymst_message())
     contents.append(flex_ymst)
     line_bot_api.reply_message(event.reply_token, messages=contents)
+
+if __name__=="__main__":
+    port = int(os.getenv("PORT",5000))
+    app.run(host="0.0.0.0", port=port)
 
 
 # @handler.add(MessageEvent, message=ImageMessage)
@@ -92,8 +90,3 @@ def handle_message(event):
 #     cv2.imwrite("static/mosaic.jpg", src)
 
 #     return True
-
-
-if __name__=="__main__":
-    port = int(os.getenv("PORT",5000))
-    app.run(host="0.0.0.0", port=port)
