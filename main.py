@@ -3,12 +3,10 @@ import json
 import logging
 import random
 import cv2
-from pathlib import Path
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
-                            TextMessage, TextSendMessage, FollowEvent, FlexSendMessage)
+from linebot.models import ImageMessage, ImageSendMessage, MessageEvent, TextMessage, TextSendMessage, FollowEvent, FlexSendMessage
 
 import message_ymst as ymst
 #hagih
@@ -55,25 +53,7 @@ def handle_message(event):
     contents = []
     flex_ymst = FlexSendMessage.new_from_json_dict(ymst.get_ymst_message())
     contents.append(flex_ymst)
-    # line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text))
     line_bot_api.reply_message(event.reply_token, messages=contents)
-
-
-
-   
-    
-
-def handle_textmessage(event):
-    print("ログ成功！！！！！！！！！")
-    line_bot_api.reply_message(
-        event.reply_token,
-        [
-            TextSendMessage(text="目を検知できませんでした。"),
-            TextSendMessage(text="他の画像を送信してください。"),
-        ]
-    )
-
-
 
 
 @handler.add(MessageEvent, message=ImageMessage)
@@ -96,8 +76,6 @@ def handle_image(event):
                 preview_image_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
             )
         )
-    else:
-        handle_textmessage(event)
 
 def change_image(event):
     message_id = event.message.id
@@ -114,19 +92,6 @@ def change_image(event):
 
     ratio = 0.05     #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
 
-
-# 検出した場合
-    #if len(facerect) > 0:
-#
-    #    # 検出した顔を囲む矩形の作成
-    #    for rect in facerect:
-    #        cv2.rectangle(image, tuple(rect[0:2]), tuple(rect[0:2] + rect[2:4]), color, thickness=2)
-    #else:
-    #    return False
-#
-    #cv2.imwrite(output_path, image)
-    ## 認識結果の保存
-
     if len(eyes) > 0:
         for x, y, w, h in eyes:  # 引数でeyesで取得した数分forループ
             # y:はHEIGHT、x:はWEIGHT  fxはxの縮小率、fyはyの縮小率
@@ -138,12 +103,6 @@ def change_image(event):
     cv2.imwrite("static/mosaic.jpg", src)
 
     return True
-#def save_image(message_id: str, save_path: str) -> None:
-    #"""保存"""
-    #message_content = line_bot_api.get_message_content(message_id)
-    #with open(save_path, "wb") as f:
-       # for chunk in message_content.iter_content():
-        #    f.write(chunk)
 
 
 if __name__ == "__main__":
