@@ -11,8 +11,8 @@ app = Flask(__name__)
 
 # face_cascade_path = "haarcascade_frontalface_default.xml"
 # eye_cascade_path = "haarcascade_eye.xml"
-YOUR_CHANNEL_ACCESS_TOKEN=os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
-YOUR_CHANNEL_SECRET=os.environ["YOUR_CHANNEL_SECRET"]
+YOUR_CHANNEL_ACCESS_TOKEN=os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]="21MB2pzMrEs0JNqAdPTPyxFJmnaljipr9bLiUuMJrPWaLeCPHmK1tnqK23FoVL9kjqnpmyaJ0jFu3/KBCKl+O0WKIYzZ6lqfNEcAGaw3ag8aOwVlNzFsgmgVjiyewGsJOjnlogELVfGGTqz/PRJimwdB04t89/1O/w1cDnyilFU="
+YOUR_CHANNEL_SECRET=os.environ["YOUR_CHANNEL_SECRET"]="b392c7fd703eba783a31c2c6cb80a890"
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
