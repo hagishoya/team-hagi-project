@@ -4,11 +4,13 @@ import logging
 import random
 import cv2
 from pathlib import Path
-from flask import Flask, abort, request
-from linebot import (LineBotApi, WebhookHandler)
+from flask import Flask, request, abort
+from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage, FollowEvent, FlexSendMessage)
+
+import message_ymst as ymst
 #hagih
 
 
@@ -48,22 +50,13 @@ def callback():
         abort(400)
     return "OK"
 
-@handler.add(FollowEvent)
-def handle_follow(event):
-    with open('./saisyohaguu_message.json') as f:
-        saisyohaguu_message = json.load(f)
-    line_bot_api.reply_message(
-        event.reply_token,
-        FlexSendMessage(alt_text='最初はぐー', contents=saisyohaguu_message)
-    )
-@handler.default()
-def default(event):
-    with open('./saisyohaguu_message.json') as f:
-        saisyohaguu_message = json.load(f)
-    line_bot_api.reply_message(
-        event.reply_token,
-        FlexSendMessage(alt_text='最初はぐー', contents=saisyohaguu_message)
-    )
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    contents = []
+    flex_ymst = FlexSendMessage.new_from_json_dict(ymst.get_ymst_message())
+    contents.append(flex_ymst)
+    # line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text))
+    line_bot_api.reply_message(event.reply_token, messages=contents)
 
 
 
