@@ -34,14 +34,11 @@ def hello_world():
 
 @app.route("/callback", methods=["POST"])
 def callback():
-    # get X-Line-Signature header value
-    signature = request.headers["X-Line-Signature"]     #lineしか受け付けない
+    signature = request.headers["X-Line-Signature"]
 
-    # get request body as text
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+    print("Request body: {}".format(body))
 
-    # handle webhook body
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
@@ -56,53 +53,53 @@ def handle_message(event):
     line_bot_api.reply_message(event.reply_token, messages=contents)
 
 
-@handler.add(MessageEvent, message=ImageMessage)
-def handle_image(event):
-    message_id = event.message.id
+# @handler.add(MessageEvent, message=ImageMessage)
+# def handle_image(event):
+#     message_id = event.message.id
 
-    # 画像を保存
+#     # 画像を保存
 
-    message_content = line_bot_api.get_message_content(message_id)
+#     message_content = line_bot_api.get_message_content(message_id)
 
-    with open("static/"+ message_id + ".jpg", "wb") as f:
-        f.write(message_content.content)
+#     with open("static/"+ message_id + ".jpg", "wb") as f:
+#         f.write(message_content.content)
 
-    result = change_image(event)
-    if result:
-        print("ログ成功！！！！！！！！！")
-        line_bot_api.reply_message(
-            event.reply_token, ImageSendMessage(
-                original_content_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
-                preview_image_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
-            )
-        )
+#     result = change_image(event)
+#     if result:
+#         print("ログ成功！！！！！！！！！")
+#         line_bot_api.reply_message(
+#             event.reply_token, ImageSendMessage(
+#                 original_content_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
+#                 preview_image_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
+#             )
+#         )
 
-def change_image(event):
-    message_id = event.message.id
-    fname = "static/" + message_id + ".jpg"  # 画像ファイル名
+# def change_image(event):
+#     message_id = event.message.id
+#     fname = "static/" + message_id + ".jpg"  # 画像ファイル名
 
 
 
-    eye_cascade = cv2.CascadeClassifier(eye_cascade_path)
+#     eye_cascade = cv2.CascadeClassifier(eye_cascade_path)
 
-    src = cv2.imread(fname)
-    src_mosaic = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
+#     src = cv2.imread(fname)
+#     src_mosaic = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 
-    eyes = eye_cascade.detectMultiScale(src_mosaic)
+#     eyes = eye_cascade.detectMultiScale(src_mosaic)
 
-    ratio = 0.05     #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
+#     ratio = 0.05     #縮小処理時の縮小率(小さいほどモザイクが大きくなる)
 
-    if len(eyes) > 0:
-        for x, y, w, h in eyes:  # 引数でeyesで取得した数分forループ
-            # y:はHEIGHT、x:はWEIGHT  fxはxの縮小率、fyはyの縮小率
-            small = cv2.resize(src[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
-            src[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
-    else:
-        return False
+#     if len(eyes) > 0:
+#         for x, y, w, h in eyes:  # 引数でeyesで取得した数分forループ
+#             # y:はHEIGHT、x:はWEIGHT  fxはxの縮小率、fyはyの縮小率
+#             small = cv2.resize(src[y: y + h, x: x + w], None, fx=ratio, fy=ratio, interpolation=cv2.INTER_NEAREST)
+#             src[y: y + h, x: x + w] = cv2.resize(small, (w, h), interpolation=cv2.INTER_NEAREST)
+#     else:
+#         return False
 
-    cv2.imwrite("static/mosaic.jpg", src)
+#     cv2.imwrite("static/mosaic.jpg", src)
 
-    return True
+#     return True
 
 
 if __name__ == "__main__":
