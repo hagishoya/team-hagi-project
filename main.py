@@ -37,7 +37,7 @@ def handle_message(event):
     contents.append(flex_ysdm)
     contents.append(flex_ymst)
     contents.append(flex_bubble)
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text))
+    #line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text))
     line_bot_api.reply_message(event.reply_token, messages=contents)
 
 if __name__=="__main__":
