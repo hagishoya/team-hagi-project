@@ -118,8 +118,8 @@ def handle_image(event):
 
     line_bot_api.reply_message(
         event.reply_token, ImageSendMessage(
-            original_content_url="ttps://team-hagi-project.herokuapp.com/static/mosaic.jpg",
-            preview_image_url="ttps://team-hagi-project.herokuapp.com/static/mosaic.jpg",
+            original_content_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
+            preview_image_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
         )
     )
     #else:
