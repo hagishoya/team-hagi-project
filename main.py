@@ -133,10 +133,10 @@ def flex_message(event):
 
 
     
-    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+    if event.reply_token == "00000000000000000000000000000000":
         return
 
-    if event.reply_token == "00000000000000000000000000000000":
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
 
     user_id = "U0702a57cd35b16d81966cf38edfecb78"
