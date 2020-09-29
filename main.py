@@ -31,12 +31,12 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     contents = []
-    flex_ysdm = FlexSendMessage.new_from_json_dict(ysdm.get_ysdm_message())
+    #flex_ysdm = FlexSendMessage.new_from_json_dict(ysdm.get_ysdm_message())
     flex_ymst = FlexSendMessage.new_from_json_dict(ymst.get_ymst_message())
-    flex_bubble = FlexSendMessage.new_from_json_dict(bubble.get_message_bubble())
-    contents.append(flex_ysdm)
+    #flex_bubble = FlexSendMessage.new_from_json_dict(bubble.get_message_bubble())
+    #contents.append(flex_ysdm)
     contents.append(flex_ymst)
-    contents.append(flex_bubble)
+    #contents.append(flex_bubble)
     #line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text))
     line_bot_api.reply_message(event.reply_token, messages=contents)
 
