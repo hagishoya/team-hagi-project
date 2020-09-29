@@ -1,6 +1,6 @@
 import os
 import random
-import json
+import json 
 
 from pathlib import Path
 
@@ -13,6 +13,7 @@ from linebot.models import (ImageMessage, ImageSendMessage, MessageEvent,
                             TextMessage, TextSendMessage, FlexSendMessage)
 
 import cv2
+import numpy as np
 
 
 
@@ -109,51 +110,40 @@ def handle_image(event):
     with open("static/"+ message_id + ".jpg", "wb") as f:
         f.write(message_content.content)
 
-    #with open('test.json') as f:
-    #    df = json.load(f)
-    payload = {
-        "type": "template",
-        "altText": "this is a carousel template",
-        "template": {
-          "type": "carousel",
-          "actions": [],
-          "columns": [
-            {
-              "thumbnailImageUrl": "SPECIFY_YOUR_IMAGE_URL",
-              "title": "加工処理",
-              "text": "加工したい処理を選択してください",
-              "actions": [
-                {
-                  "type": "message",
-                  "label": "髪加工",
-                  "text": "1"
-                },
-                {
-                  "type": "message",
-                  "label": "目元加工",
-                  "text": "2"
-                }
-            ]
-        }
-    ]
-  }
-}
+    flex_result = flex_message(event)
 
-    container_obj = FlexSendMessage.new_from_json_dict(payload)
+    
+    change_image2(event)
+    #if result:
 
-    line_bot_api.push_message('送りたい相手のUserID', messages=container_obj)
-
-    result = change_image(event)
-    if result:
-        print("ログ成功！！！！！！！！！")
-        line_bot_api.reply_message(
-            event.reply_token, ImageSendMessage(
-                original_content_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
-                preview_image_url="https://team-hagi-project.herokuapp.com/static/mosaic.jpg",
-            )
+    line_bot_api.reply_message(
+        event.reply_token, ImageSendMessage(
+            original_content_url="ttps://team-hagi-project.herokuapp.com/static/mosaic.jpg",
+            preview_image_url="ttps://team-hagi-project.herokuapp.com/static/mosaic.jpg",
         )
-    else:
-        handle_textmessage(event)
+    )
+    #else:
+    handle_textmessage(event)
+    
+
+def flex_message(event):
+    f = open('test.json', 'r')
+    messages = json.load(f)
+    messages = FlexSendMessage(alt_text="test", contents=messages)
+
+
+    
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+
+    user_id = "U0702a57cd35b16d81966cf38edfecb78"
+    line_bot_api.push_message(user_id, messages=messages)
+
+
+    return messages
 
 def change_image(event):
     message_id = event.message.id
@@ -202,6 +192,27 @@ def change_image(event):
         #    f.write(chunk)
 
 
+def change_image2(event):
+    message_id = event.message.id
+    fname = "static/" + message_id + ".jpg"  # 画像ファイル名
+    img = cv2.imread(fname)
+
+
+    height = img.shape[0]
+    width = img.shape[1]
+
+    img2 = cv2.resize(img , (int(width*0.5), int(height*0.5)))
+    hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
+    hsv_2 = np.copy(hsv)
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (hsv[:, :, 0]<25) ,hsv[:, :,(2)]*0.2,hsv[:, :, 0])
+    bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
+    #cv2.imshow('image',bgr)
+    #cv2.waitKey(0)
+    #cv2.destroyAllWindows()
+
+    cv2.imwrite("static/mosaic.jpg", bgr)
+    cv2.waitKey(0)
+#https://teratail.com/questions/284276
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
