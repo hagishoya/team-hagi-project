@@ -75,7 +75,7 @@ def flex(event):
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
     text_save_id(work)
     text_save_reply(reply_work)
-    json_open = open('hello.json', 'r')
+    json_open = open('test.json', 'r')
     json_data = json.load(json_open)
     #print("json_data: {}".format(json_data.get("hero").get("url")))
     #print(json_data.get("hero").get("url"))
