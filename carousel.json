@@ -2,43 +2,13 @@
   "type": "carousel",
   "contents": [
     {
-      "type": "bubble",
-      "body": {
-        "type": "box",
-        "layout": "horizontal",
-        "contents": [
-          {
-            "thumbnailImageUrl": "https://ggo.ismcdn.jp/mwimgs/8/6/-/img_864fe01106d99315535924b60c6764ad707281.jpg",
-            "type": "text",
-            "text": "おめめモザイク",
-            "wrap": true
-          }
-        ]
-      },
-      "footer": {
-        "type": "box",
-        "layout": "horizontal",
-        "contents": [
-          {
-            "type": "button",
-            "style": "primary",
-            "action": {
-              "type": "message",
-              "label": "変更",
-              "text": "1"
-            }
-          }
-        ]
-      }
-    },
-    {
         "type": "bubble",
       "hero": {
         "type": "image",
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "cover",
-        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png"
+        "url": "https://ggo.ismcdn.jp/mwimgs/8/6/-/img_864fe01106d99315535924b60c6764ad707281.jpg"
       },
       "footer": {
         "type": "box",
@@ -60,6 +30,41 @@
               "type": "message",
               "label": "変更",
               "text": "1"
+            },
+            "position": "relative"
+          }
+        ]
+      }
+    },
+    {
+         "type": "bubble",
+      "hero": {
+        "type": "image",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "url": "https://lh3.googleusercontent.com/p7PQ3B7mVLRP8BiaRLcOo3tAC9duWUb2JK2I0OxcfOpBLVz1jxppEqZSFGFAxoF1w-0x6YRVBd_TKBEg9Q4aymxrDD4KJEGzG-hTEuODqPcc3qTRQMTSUM0tWoKe9FOnQ8RtvsBfKRYmxdM6QPtSL1ZpQRlvAqrUvip6C_vCVaS6oJ7nGq4Ek1Run7fVOJ5lH1SdenTh-UwVTnDE_CtGJyF-mHQupXrKhQ4ezBnTD1k9hyxYspiTBlqX1TxPSBQBlG90BqB05APZNfzwpia_9GmKusv89qSLBcBhNm8e2j5L7K1xTO9qpZJDdiJvMoWB4sGSoqXrS1QJ6_DX3Z6U3aLzWtyJQLX5q5KcLql1LN6NsKmXVqSzjw4anAKUx3i5Q2c2SQKJBWOCXmELb9Qjbq9i7nJy1mfzJ90361H3_LXlyX3xEYSBfJdVrfhja7MX9F-BKF_36rXB9yX1IeBkGATLUHob2dTGWenH04te9hVOqpYyAzZk9v1MlWBSG201ykX2cxd0W5qrYJYzjJmltHjNZSkimwo0FPrKwFJhuTKWfrtb_LsFRiZrCJnlZgF5cS8lu6GGR1HDTV00qMwrXKxU-V2jtBnzAO8XdFM58tYvJ__IhyrVMy9l769F91F_C06fZZ3H6kRfl5GGV5Z8WiKqJiMdWFZobex8kMaFlenNijl8ra0eoO0SjAlg=w700-h842-no?authuser=0"
+      },
+      "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "text",
+            "text": "線画化",
+            "wrap": true,
+            "align": "center",
+            "position": "relative",
+            "size": "md"
+          },
+          {
+            "type": "button",
+            "style": "primary",
+            "action": {
+              "type": "message",
+              "label": "変更",
+              "text": "2"
             },
             "position": "relative"
           }
