@@ -37,7 +37,7 @@
         "height": "sm",
         "action": {
           "type": "message",
-          "label": "顔加工",
+          "label": "目モザイク",
           "text": "1"
         },
         "flex": 5
@@ -48,8 +48,30 @@
         "height": "sm",
         "action": {
           "type": "message",
-          "label": "髪加工",
+          "label": "線画化",
           "text": "2"
+        },
+        "flex": 5
+      },
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "message",
+          "label": "アニメ絵",
+          "text": "3"
+        },
+        "flex": 5
+      },
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "message",
+          "label": "ドット絵",
+          "text": "4"
         },
         "flex": 5
       },
