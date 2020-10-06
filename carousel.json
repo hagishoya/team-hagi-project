@@ -8,8 +8,9 @@
         "layout": "horizontal",
         "contents": [
           {
+            "thumbnailImageUrl": "https://ggo.ismcdn.jp/mwimgs/8/6/-/img_864fe01106d99315535924b60c6764ad707281.jpg",
             "type": "text",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "text": "おめめモザイク",
             "wrap": true
           }
         ]
@@ -22,9 +23,9 @@
             "type": "button",
             "style": "primary",
             "action": {
-              "type": "uri",
-              "label": "Go",
-              "uri": "https://example.com"
+              "type": "message",
+              "label": "変更",
+              "text": "1"
             }
           }
         ]
