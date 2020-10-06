@@ -1,7 +1,6 @@
 {
     "type": "carousel",
-    "actions": [],
-    "columns": [
+    "contents": [
         {
             "thumbnailImageUrl": "https://ggo.ismcdn.jp/mwimgs/8/6/-/img_864fe01106d99315535924b60c6764ad707281.jpg",
             "text": "おめめ",
