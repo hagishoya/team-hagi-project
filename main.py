@@ -113,14 +113,14 @@ def flex(event):
     line_bot_api.push_message('U0702a57cd35b16d81966cf38edfecb78', messages=messages)
 
 
-def handle_textmessage(event):
-    line_bot_api.reply_message(event.reply_token,
-        [
-            #TextSendMessage(text=event.message.text),
-            TextSendMessage(text="顔、目を検知できませんでした。"),
-            #TextSendMessage(text=event.message.id),
-        ]
-        )
+# def handle_textmessage(event):
+#     line_bot_api.reply_message(event.reply_token,
+#         [
+#             #TextSendMessage(text=event.message.text),
+#             TextSendMessage(text="顔、目を検知できませんでした。"),
+#             #TextSendMessage(text=event.message.id),
+#         ]
+#         )
 
 #画像受信後処理
 @handler.add(MessageEvent, message=ImageMessage)
@@ -169,27 +169,27 @@ def handle_send_message2(event,relpy):
             )
             )
 
-    else:
-        handle_textmessage(event)
+    # else:
+    #     handle_textmessage(event)
 
 def handle_send_message3(event,reply):
+    plt.set_cmap("gray")
     result = art_image(event)
     reply = str(reply)
-    if result:
-        line_bot_api.reply_message(
-            reply, ImageSendMessage(
-                original_content_url=FQDN + "/static/" + event + "_face.jpg",
-                preview_image_url=FQDN + "/static/" + event + "_face.jpg",
-            )
-            )
-    else:
-        handle_textmessage(event)
+    # if result:
+    line_bot_api.reply_message(
+        reply, ImageSendMessage(
+            original_content_url=FQDN + "/static/" + event + "_face.jpg",
+            preview_image_url=FQDN + "/static/" + event + "_face.jpg",
+        )
+    )
+    # else:
+    #     handle_textmessage(event)
     
     # plt.close("all")
     # plt.figure(figsize=[8, 8])
-    plt.set_cmap("gray")
     # plt.clf()
-    art_image(event)
+    # art_image(event)
     
 #囲う処理
 def change_image(event):
