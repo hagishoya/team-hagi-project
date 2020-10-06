@@ -32,30 +32,36 @@
       }
     },
     {
-      "type": "bubble",
-      "body": {
-        "type": "box",
-        "layout": "horizontal",
-        "contents": [
-          {
-            "type": "text",
-            "text": "Hello, World!",
-            "wrap": true
-          }
-        ]
+        "type": "bubble",
+      "hero": {
+        "type": "image",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_5_carousel.png"
       },
       "footer": {
         "type": "box",
-        "layout": "horizontal",
+        "layout": "vertical",
+        "spacing": "sm",
         "contents": [
+          {
+            "type": "text",
+            "text": "おめめモザイク",
+            "wrap": true,
+            "align": "center",
+            "position": "relative",
+            "size": "md"
+          },
           {
             "type": "button",
             "style": "primary",
             "action": {
-              "type": "uri",
-              "label": "Go",
-              "uri": "https://example.com"
-            }
+              "type": "message",
+              "label": "変更",
+              "text": "1"
+            },
+            "position": "relative"
           }
         ]
       }
