@@ -56,7 +56,7 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        handle_send_message2(work,work1)
+        handle_send_message(work,work1)
     #線画
     elif event.message.text == "2":
         print("通過: {}".format(event.message.text))
@@ -64,7 +64,15 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        handle_send_message3(work,work1)
+        handle_send_message2(work,work1)
+
+    elif event.message.text == "4":
+        print("通過: {}".format(event.message.text))
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        handle_send_message4(work,work1)
 
 
 
@@ -157,7 +165,7 @@ def handle_image_message(event):
 
 
 #画像送信処理
-def handle_send_message2(event,relpy):
+def handle_send_message(event,relpy):
     #mozaiku(event)
     result = change_image(event)
     reply = str(relpy)
@@ -172,7 +180,7 @@ def handle_send_message2(event,relpy):
     # else:
     #     handle_textmessage(event)
 
-def handle_send_message3(event,reply):
+def handle_send_message2(event,reply):
     plt.set_cmap("gray")
     result = art_image(event)
     reply = str(reply)
@@ -191,19 +199,8 @@ def handle_send_message3(event,reply):
     # plt.clf()
     # art_image(event)
 
-    # def handle_send_message4(event,relpy):
-    # #mozaiku(event)
-    # result = illust_image(event)
-    # reply = str(relpy)
-    # if result:
-    #     line_bot_api.reply_message(
-    #         reply, ImageSendMessage(
-    #             original_content_url=FQDN + "/static/" + event + "_face.jpg",
-    #             preview_image_url=FQDN + "/static/" + event + "_face.jpg",
-    #         )
-    #         )
 
-def handle_send_message5(event,relpy):
+def handle_send_message4(event,relpy):
     #mozaiku(event)
     result = dot_image(event)
     reply = str(relpy)
