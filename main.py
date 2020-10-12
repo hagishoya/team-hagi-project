@@ -191,17 +191,17 @@ def handle_send_message3(event,reply):
     # plt.clf()
     # art_image(event)
 
-    def handle_send_message4(event,relpy):
-    #mozaiku(event)
-    result = illust_image(event)
-    reply = str(relpy)
-    if result:
-        line_bot_api.reply_message(
-            reply, ImageSendMessage(
-                original_content_url=FQDN + "/static/" + event + "_face.jpg",
-                preview_image_url=FQDN + "/static/" + event + "_face.jpg",
-            )
-            )
+    # def handle_send_message4(event,relpy):
+    # #mozaiku(event)
+    # result = illust_image(event)
+    # reply = str(relpy)
+    # if result:
+    #     line_bot_api.reply_message(
+    #         reply, ImageSendMessage(
+    #             original_content_url=FQDN + "/static/" + event + "_face.jpg",
+    #             preview_image_url=FQDN + "/static/" + event + "_face.jpg",
+    #         )
+    #         )
 
 def handle_send_message5(event,relpy):
     #mozaiku(event)
@@ -214,19 +214,6 @@ def handle_send_message5(event,relpy):
                 preview_image_url=FQDN + "/static/" + event + "_face.jpg",
             )
             )
-
-def handle_send_message2(event,relpy):
-    #mozaiku(event)
-    result = change_image(event)
-    reply = str(relpy)
-    if result:
-        line_bot_api.reply_message(
-            reply, ImageSendMessage(
-                original_content_url=FQDN + "/static/" + event + "_face.jpg",
-                preview_image_url=FQDN + "/static/" + event + "_face.jpg",
-            )
-            )
-
     
 #囲う処理
 def change_image(event):
@@ -342,16 +329,16 @@ def art_image(event):
 
 ################################################################
 
-def illust_image(event):
-    image_file = event + ".jpg"
-    save_file = event + "_face.jpg"
-    #save_file2 = event.message.id + "_face2.jpg"
-    print("イメージファイル: {} // {}".format(image_file, save_file))
-    image_path = "static/" + image_file
-    print("イメージパス: {}".format(image_path))
-    output_path = "static/" + save_file
-    #output_path2 = "static/" + save_file2
-    print("アウトプットパス: {}".format(output_path))
+# def illust_image(event):
+#     image_file = event + ".jpg"
+#     save_file = event + "_face.jpg"
+#     #save_file2 = event.message.id + "_face2.jpg"
+#     print("イメージファイル: {} // {}".format(image_file, save_file))
+#     image_path = "static/" + image_file
+#     print("イメージパス: {}".format(image_path))
+#     output_path = "static/" + save_file
+#     #output_path2 = "static/" + save_file2
+#     print("アウトプットパス: {}".format(output_path))
 
 ################################################################
 
