@@ -207,13 +207,12 @@ def handle_send_message5(event,relpy):
     #mozaiku(event)
     result = dot_image(event)
     reply = str(relpy)
-    if result:
-        line_bot_api.reply_message(
-            reply, ImageSendMessage(
-                original_content_url=FQDN + "/static/" + event + "_face.jpg",
-                preview_image_url=FQDN + "/static/" + event + "_face.jpg",
-            )
-            )
+    line_bot_api.reply_message(
+        reply, ImageSendMessage(
+            original_content_url=FQDN + "/static/" + event + "_face.jpg",
+            preview_image_url=FQDN + "/static/" + event + "_face.jpg",
+        )
+        )
     
 #囲う処理
 def change_image(event):
