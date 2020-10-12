@@ -400,6 +400,7 @@ def dot_image(event):
     dst = pixel_art(img, 0.5, 4)
     
     # 結果を出力
+    print("出力確認:{}".format(output_path))
     cv2.imwrite(output_path, dst)
 ################################################################
 
