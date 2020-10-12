@@ -352,8 +352,7 @@ def dot_image(event):
     output_path = "static/" + save_file
     #output_path2 = "static/" + save_file2
     print("アウトプットパス: {}".format(output_path))
-    img = cv2.imread(image_path)
-
+ 
     # 減色処理
     def sub_color(src, K):
         # 次元数を1落とす
@@ -395,6 +394,8 @@ def dot_image(event):
         # 減色処理
         return sub_color(img, K)
 
+    img = cv2.imread(image_path)
+    
     image = pixel_art(img, 0.5, 4)
 
     cv2.imwrite(output_path, image)
