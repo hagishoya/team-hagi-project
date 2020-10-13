@@ -55,7 +55,7 @@ def pixel_art(img, alpha=10, K=4):
 
 def dot_image(event):
     
-    image_path, output_path = path_data(event)
+    image_path, output_path = path_data.get_image_path(event)
 
     # 元画像の読み込み
     img = cv2.imread(image_path)

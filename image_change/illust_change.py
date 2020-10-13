@@ -36,7 +36,7 @@ def illust_filter(img, K=20):
 
 def illust_image(event):
     
-    image_path, output_path = path_data(event)
+    image_path, output_path = path_data.get_image_path(event)
 
     # 元画像の読み込み
     img = cv2.imread(image_path)

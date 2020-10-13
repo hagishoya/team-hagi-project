@@ -14,7 +14,7 @@ def mosic_image(event):
     cascade_path = "haarcascade_frontalface_default.xml"
     cascade_eye_path = "haarcascade_eye.xml"
 
-    image_path, output_path = path_data(event)
+    image_path, output_path = path_data.get_image_path(event)
 
     # ファイル読み込みo
     image = cv2.imread(image_path)

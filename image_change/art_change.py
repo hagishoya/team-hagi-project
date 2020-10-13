@@ -11,7 +11,7 @@ import path_data
 
 def art_image(event):
 
-    image_path, output_path = path_data(event)
+    image_path, output_path = path_data.get_image_path(event)
 
     # カーネルを定義
     kernel = np.ones((5,5), np.uint8)
