@@ -328,7 +328,7 @@ def art_image(event):
 ###-------------------------イラスト--------------------------###
 
 def illust_filter(img, K=20):
-    
+
     # グレースケール変換
     gray = cv2.cvtColor(img, cv2.COLOR_BGRA2GRAY)
 
@@ -408,7 +408,7 @@ def mosaic(img, alpha):
     return img
 
 # ドット絵化
-def pixel_art(img, alpha=4, K=4):
+def pixel_art(img, alpha=10, K=4):
     # モザイク処理
     img = mosaic(img, alpha)
 
