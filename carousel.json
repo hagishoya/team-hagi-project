@@ -29,7 +29,7 @@
             "action": {
               "type": "message",
               "label": "変更",
-              "text": "1"
+              "text": ">>おめめモザイク"
             },
             "position": "relative"
           }
@@ -64,7 +64,7 @@
             "action": {
               "type": "message",
               "label": "変更",
-              "text": "2"
+              "text": ">>線画風"
             },
             "position": "relative"
           }
@@ -99,7 +99,7 @@
             "action": {
               "type": "message",
               "label": "変更",
-              "text": "3"
+              "text": ">>イラスト風"
             },
             "position": "relative"
           }
@@ -134,7 +134,7 @@
             "action": {
               "type": "message",
               "label": "変更",
-              "text": "4"
+              "text": ">>ドット絵風"
             },
             "position": "relative"
           }

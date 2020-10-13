@@ -51,7 +51,7 @@ def handle_message(event):
     print(type(event.reply_token))
 
     #モザイク(目)
-    if event.message.text == "1":
+    if event.message.text == ">>おめめモザイク":
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
@@ -61,38 +61,35 @@ def handle_message(event):
         output_method.handle_send_message(work,work1)
 
     #線画
-    elif event.message.text == "2":
+    elif event.message.text == ">>線画風":
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="画像を線画化しています..."),])
         output_method.handle_send_message2(work,work1)
 
     #イラスト風
-    elif event.message.text == "3":
+    elif event.message.text == ">>イラスト風":
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="イラスト風に変更しています..."),])
         output_method.handle_send_message3(work,work1)
 
     #ドット絵
-    elif event.message.text == "4":
+    elif event.message.text == ">>ドット絵風":
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="ドット絵風に変更しています..."),])
         output_method.handle_send_message4(work,work1)
     
-
-
-
-def result_message(event,reply):
-    line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="処理が完了しました。ご利用ありがとうございました。"),])
-
 def text_save_id(work):
     s = work
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD_text_saveID:{}".format(work))
