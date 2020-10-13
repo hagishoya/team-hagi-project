@@ -25,6 +25,7 @@ def handle_send_message(event,relpy):
                 preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
             )
             )
+    print("check result:{}".format(event))
     main.result_message(event)
     
 
