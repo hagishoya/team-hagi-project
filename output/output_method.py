@@ -25,6 +25,8 @@ def handle_send_message(event,relpy):
                 preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
             )
             )
+    main.result_message(event)
+    
 
     # else:
     #     handle_textmessage(event)
@@ -40,7 +42,7 @@ def handle_send_message2(event,reply):
             original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
             preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
         )
-    )
+        )
     # else:
     #     handle_textmessage(event)
     
@@ -65,4 +67,5 @@ def handle_send_message4(event,relpy):
             preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
         )
         )
+    main.result_message(event)
 ################################################################
