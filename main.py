@@ -2,7 +2,7 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImageMessage, FlexSendMessage,CarouselContainer,BubbleContainer
-import image_change.art_change, image_change.dot_change, image_change.illust_change, image_change.mosic_change, path_data
+from image_change import mosic_change, art_change, dot_change, illust_change
 import json
 import os
 import cv2
@@ -154,7 +154,7 @@ def handle_image_message(event):
 #モザイク送信
 def handle_send_message(event,relpy):
     #mozaiku(event)
-    result = image_change.mosic_change(event)
+    result = mosic_change.mosic_image(event)
     reply = str(relpy)
     if result:
         line_bot_api.reply_message(
@@ -170,7 +170,7 @@ def handle_send_message(event,relpy):
 # 線画送信
 def handle_send_message2(event,reply):
     plt.set_cmap("gray")
-    result = image_change.art_change(event)
+    result = art_change.art_image(event)
     reply = str(reply)
     # if result:
     line_bot_api.reply_message(
@@ -184,7 +184,7 @@ def handle_send_message2(event,reply):
     
 # イラスト送信
 def handle_send_message3(event,relpy):
-    result = image_change.illust_image(event)
+    result = illust_change.illust_image(event)
     reply = str(relpy)
     line_bot_api.reply_message(
         reply, ImageSendMessage(
@@ -195,7 +195,7 @@ def handle_send_message3(event,relpy):
 
 # ドット絵送信
 def handle_send_message4(event,relpy):
-    result = image_change.dot_image(event)
+    result = mosic_change.mosic_image(event)
     reply = str(relpy)
     line_bot_api.reply_message(
         reply, ImageSendMessage(
