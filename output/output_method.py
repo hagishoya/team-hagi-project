@@ -26,7 +26,7 @@ def handle_send_message(event,relpy):
             )
             )
     print("check result:{}".format(event))
-    main.result_message(reply)
+    main.result_message(event)
     
 
     # else:
@@ -68,5 +68,4 @@ def handle_send_message4(event,relpy):
             preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
         )
         )
-    main.result_message(reply)
 ################################################################
