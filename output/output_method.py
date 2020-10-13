@@ -26,7 +26,7 @@ def handle_send_message(event,relpy):
             )
             )
     print("check result:{}".format(event))
-    main.result_message(event)
+    main.result_message(reply)
     
 
     # else:
