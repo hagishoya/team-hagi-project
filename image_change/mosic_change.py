@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImageMessage, FlexSendMessage,CarouselContainer,BubbleContainer
+import main
 import json
 import os
 import cv2
@@ -11,9 +12,6 @@ import path_data
 
 def mosic_image(event):
     bool = True
-    cascade_path = "haarcascade_frontalface_default.xml"
-    cascade_eye_path = "haarcascade_eye.xml"
-
     image_path, output_path = path_data.get_image_path(event)
 
     # ファイル読み込みo
@@ -23,8 +21,8 @@ def mosic_image(event):
     image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # カスケード分類器の特徴量を取得する
-    cascade = cv2.CascadeClassifier(cascade_path)
-    cascade_eye = cv2.CascadeClassifier(cascade_eye_path)
+    cascade = cv2.CascadeClassifier(main.cascade_path)
+    cascade_eye = cv2.CascadeClassifier(main.cascade_eye_path)
     # 物体認識（顔認識）の実行
     # image – CV_8U 型の行列．ここに格納されている画像中から物体が検出されます
     # objects – 矩形を要素とするベクトル．それぞれの矩形は，検出した物体を含みます

@@ -4,23 +4,26 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImageMessage, FlexSendMessage,CarouselContainer,BubbleContainer
 from image_change import mosic_change, art_change, dot_change, illust_change
 from output import output_method
-from entry import entry_method
 import json
 import os
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
+# リプライIDとイベントIDをテキストとして保存するためのやつ
 work = {}
 path_w1 = 'saveid.txt'
 path_w2 = 'savereply.txt'
 app = Flask(__name__)
 
+# トークン情報もろもろ
 YOUR_CHANNEL_ACCESS_TOKEN = "21MB2pzMrEs0JNqAdPTPyxFJmnaljipr9bLiUuMJrPWaLeCPHmK1tnqK23FoVL9kjqnpmyaJ0jFu3/KBCKl+O0WKIYzZ6lqfNEcAGaw3ag8aOwVlNzFsgmgVjiyewGsJOjnlogELVfGGTqz/PRJimwdB04t89/1O/w1cDnyilFU="
 YOUR_CHANNEL_SECRET = "b392c7fd703eba783a31c2c6cb80a890"
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 FQDN = " https://team-hagi-project.herokuapp.com"
+cascade_path = "haarcascade_frontalface_default.xml"
+cascade_eye_path = "haarcascade_eye.xml"
 
 
 
@@ -37,17 +40,10 @@ def callback():
         abort(400)
     return "OK"
 
-
+# テキストデータを受け取ったときに走るやつ。
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(event.reply_token,
-       [
-           TextSendMessage(text=event.message.text),
-           #TextSendMessage(text="おはよ------"),
-           #TextSendMessage(text="顔、目を検知できませんでした。"),
-           #TextSendMessage(text=event.message.id),
-       ]
-       )
+    # line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=event.message.text),])
     print("取得イヴェント:{}".format(event))
     print("取得イヴェントメッセージID:{}".format(event.message.id))
     print("リプライトークン：{}".format(event.reply_token))
@@ -61,7 +57,9 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="目のモザイク処理をしています..."),])
         output_method.handle_send_message(work,work1)
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="処理が完了しました。ご利用ありがとうございました。"),])
 
     #線画
     elif event.message.text == "2":
@@ -125,16 +123,6 @@ def flex(event):
         return
         
     line_bot_api.push_message('U0702a57cd35b16d81966cf38edfecb78', messages=messages)
-
-
-# def handle_textmessage(event):
-#     line_bot_api.reply_message(event.reply_token,
-#         [
-#             #TextSendMessage(text=event.message.text),
-#             TextSendMessage(text="顔、目を検知できませんでした。"),
-#             #TextSendMessage(text=event.message.id),
-#         ]
-#         )
 
 #画像受信後処理
 @handler.add(MessageEvent, message=ImageMessage)
