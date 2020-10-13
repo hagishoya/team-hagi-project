@@ -195,7 +195,7 @@ def handle_send_message3(event,relpy):
 
 # ドット絵送信
 def handle_send_message4(event,relpy):
-    result = mosic_change.mosic_image(event)
+    result = dot_change.dot_image(event)
     reply = str(relpy)
     line_bot_api.reply_message(
         reply, ImageSendMessage(
