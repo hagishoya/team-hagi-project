@@ -10,6 +10,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import path_data
 
+
+################################################################
+###-------------------------モザイク--------------------------###
+
 def mosic_image(event):
     bool = True
     image_path, output_path = path_data.get_image_path(event)
@@ -60,3 +64,6 @@ def mosic_image(event):
         return True
     else:
         return False
+
+
+################################################################

@@ -2,6 +2,7 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImageMessage, FlexSendMessage,CarouselContainer,BubbleContainer
+import main
 import json
 import os
 import cv2
@@ -9,6 +10,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import path_data
 
+
+################################################################
+###-------------------------線画化風--------------------------###
 def art_image(event):
 
     image_path, output_path = path_data.get_image_path(event)
@@ -39,3 +43,4 @@ def art_image(event):
                                     cv2.THRESH_BINARY, 7, 8)
 
     cv2.imwrite(output_path, image)
+################################################################
