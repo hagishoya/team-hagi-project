@@ -20,6 +20,7 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 FQDN = " https://team-hagi-project.herokuapp.com"
 
 
+
 @app.route("/callback", methods=["POST"])
 def callback():
     signature = request.headers["X-Line-Signature"]
@@ -49,6 +50,7 @@ def handle_message(event):
     print("リプライトークン：{}".format(event.reply_token))
     print("------リプライ型------")
     print(type(event.reply_token))
+    
     #モザイク(目)
     if event.message.text == "1":
         print("通過: {}".format(event.message.text))
@@ -57,6 +59,7 @@ def handle_message(event):
         with open(path_w2) as f2:
             work1 = f2.read()
         handle_send_message(work,work1)
+
     #線画
     elif event.message.text == "2":
         print("通過: {}".format(event.message.text))
@@ -66,6 +69,16 @@ def handle_message(event):
             work1 = f2.read()
         handle_send_message2(work,work1)
 
+    #イラスト風
+    elif event.message.text == "3":
+        print("通過: {}".format(event.message.text))
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        handle_send_message3(work,work1)
+
+    #ドット絵
     elif event.message.text == "4":
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
@@ -96,21 +109,11 @@ def flex(event):
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
     text_save_id(work)
     text_save_reply(reply_work)
+
+    # Json展開
     json_open = open('carousel.json', 'r')
     json_data = json.load(json_open)
-    #print("json_data: {}".format(json_data.get("hero").get("url")))
-    #print(json_data.get("hero").get("url"))
-    #json_data["hero"]
-    #message = line_bot_api.reply_message(
-    #    event.reply_token,
-    #    [
-    #        FlexSendMessage(
-    #        alt_text="flex",
-    #        contents=BubbleContainer.new_from_json_dict(json_data)
-    #        )
-    #    ]
-    #)
-
+ 
     messages = FlexSendMessage(alt_text="test", contents=json_data)
     print("フレックスメッセージ中身: {}".format(messages))
     if event.reply_token == "00000000000000000000000000000000":
@@ -141,30 +144,13 @@ def handle_image_message(event):
     with open("static/" + event.message.id + ".jpg", "wb") as f:
         f.write(message_content.content)
     
-
     flex(event)
 
-    
 
-    
-# #画像送信処理
-# def handle_send_message(event):
-#     mozaiku(event)
-#     result = change_image(event)
+################################################################
+###------------------//画像送信処理//------------------------###
 
-#     if result:
-#         line_bot_api.reply_message(
-#             event.reply_token, ImageSendMessage(
-#                 original_content_url=FQDN + "/static/" + event.message.id + "_face.jpg",
-#                 preview_image_url=FQDN + "/static/" + event.message.id + "_face.jpg",
-#             )
-#             )
-
-#     else:
-#         handle_textmessage(event)
-
-
-#画像送信処理
+#モザイク送信
 def handle_send_message(event,relpy):
     #mozaiku(event)
     result = change_image(event)
@@ -180,6 +166,7 @@ def handle_send_message(event,relpy):
     # else:
     #     handle_textmessage(event)
 
+# 線画送信
 def handle_send_message2(event,reply):
     plt.set_cmap("gray")
     result = art_image(event)
@@ -194,14 +181,19 @@ def handle_send_message2(event,reply):
     # else:
     #     handle_textmessage(event)
     
-    # plt.close("all")
-    # plt.figure(figsize=[8, 8])
-    # plt.clf()
-    # art_image(event)
+# イラスト送信
+def handle_send_message3(event,relpy):
+    result = illust_image(event)
+    reply = str(relpy)
+    line_bot_api.reply_message(
+        reply, ImageSendMessage(
+            original_content_url=FQDN + "/static/" + event + "_face.jpg",
+            preview_image_url=FQDN + "/static/" + event + "_face.jpg",
+        )
+        )
 
-
+# ドット絵送信
 def handle_send_message4(event,relpy):
-    #mozaiku(event)
     result = dot_image(event)
     reply = str(relpy)
     line_bot_api.reply_message(
@@ -210,7 +202,11 @@ def handle_send_message4(event,relpy):
             preview_image_url=FQDN + "/static/" + event + "_face.jpg",
         )
         )
-    
+
+
+################################################################
+###-------------------------モザイク--------------------------###
+
 #囲う処理
 def change_image(event):
     bool = True
@@ -219,12 +215,14 @@ def change_image(event):
 
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
-    #save_file2 = event.message.id + "_face2.jpg"
     print("イメージファイル: {} // {}".format(image_file, save_file))
+
+    # 元画像の保存場所をパスとして保管
     image_path = "static/" + image_file
     print("イメージパス: {}".format(image_path))
+
+    # 加工済みの画像の保存場所をパスとして保管
     output_path = "static/" + save_file
-    #output_path2 = "static/" + save_file2
     print("アウトプットパス: {}".format(output_path))
     # ファイル読み込みo
     image = cv2.imread(image_path)
@@ -289,13 +287,16 @@ def change_image(event):
 def art_image(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
-    #save_file2 = event.message.id + "_face2.jpg"
     print("イメージファイル: {} // {}".format(image_file, save_file))
+
+    # 元画像の保存場所をパスとして保管
     image_path = "static/" + image_file
     print("イメージパス: {}".format(image_path))
+
+    # 加工済みの画像の保存場所をパスとして保管
     output_path = "static/" + save_file
-    #output_path2 = "static/" + save_file2
     print("アウトプットパス: {}".format(output_path))
+
     # カーネルを定義
     kernel = np.ones((5,5), np.uint8)
     kernel[0,0] = kernel[0,4] = kernel[4,0] = kernel[4,4] = 0
@@ -324,19 +325,22 @@ def art_image(event):
     cv2.imwrite(output_path, image)
 
 ################################################################
+###-------------------------イラスト--------------------------###
+def illust_image(event):
+    image_file = event + ".jpg"
+    save_file = event + "_face.jpg"
+    print("イメージファイル: {} // {}".format(image_file, save_file))
 
-# def illust_image(event):
-#     image_file = event + ".jpg"
-#     save_file = event + "_face.jpg"
-#     #save_file2 = event.message.id + "_face2.jpg"
-#     print("イメージファイル: {} // {}".format(image_file, save_file))
-#     image_path = "static/" + image_file
-#     print("イメージパス: {}".format(image_path))
-#     output_path = "static/" + save_file
-#     #output_path2 = "static/" + save_file2
-#     print("アウトプットパス: {}".format(output_path))
+    # 元画像の保存場所をパスとして保管
+    image_path = "static/" + image_file
+    print("イメージパス: {}".format(image_path))
+
+    # 加工済みの画像の保存場所をパスとして保管
+    output_path = "static/" + save_file
+    print("アウトプットパス: {}".format(output_path))
 
 ################################################################
+###-------------------------ドット絵--------------------------###
 
 # 減色処理
 def sub_color(src, K):
@@ -382,12 +386,14 @@ def pixel_art(img, alpha=4, K=4):
 def dot_image(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
-    #save_file2 = event.message.id + "_face2.jpg"
     print("イメージファイル: {} // {}".format(image_file, save_file))
+
+    # 元画像の保存場所をパスとして保管
     image_path = "static/" + image_file
     print("イメージパス: {}".format(image_path))
+
+    # 加工済みの画像の保存場所をパスとして保管
     output_path = "static/" + save_file
-    #output_path2 = "static/" + save_file2
     print("アウトプットパス: {}".format(output_path))
 
     img = cv2.imread(image_path)
