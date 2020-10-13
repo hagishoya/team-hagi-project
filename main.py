@@ -203,6 +203,8 @@ def handle_send_message4(event,relpy):
         )
         )
 
+
+# 画像のパスを関数化
 def get_image_path(event):
 
     image_file = event + ".jpg"
@@ -229,18 +231,6 @@ def change_image(event):
     bool = True
     cascade_path = "haarcascade_frontalface_default.xml"
     cascade_eye_path = "haarcascade_eye.xml"
-
-    # image_file = event + ".jpg"
-    # save_file = event + "_face.jpg"
-    # print("イメージファイル: {} // {}".format(image_file, save_file))
-
-    # # 元画像の保存場所をパスとして保管
-    # image_path = "static/" + image_file
-    # print("イメージパス: {}".format(image_path))
-
-    # # 加工済みの画像の保存場所をパスとして保管
-    # output_path = "static/" + save_file
-    # print("アウトプットパス: {}".format(output_path))
 
     image_path, output_path = get_image_path(event)
 
@@ -305,17 +295,8 @@ def change_image(event):
 ###-------------------------線画処理--------------------------###
 
 def art_image(event):
-    image_file = event + ".jpg"
-    save_file = event + "_face.jpg"
-    print("イメージファイル: {} // {}".format(image_file, save_file))
 
-    # 元画像の保存場所をパスとして保管
-    image_path = "static/" + image_file
-    print("イメージパス: {}".format(image_path))
-
-    # 加工済みの画像の保存場所をパスとして保管
-    output_path = "static/" + save_file
-    print("アウトプットパス: {}".format(output_path))
+    image_path, output_path = get_image_path(event)
 
     # カーネルを定義
     kernel = np.ones((5,5), np.uint8)
@@ -370,17 +351,8 @@ def illust_filter(img, K=20):
 
 
 def illust_image(event):
-    image_file = event + ".jpg"
-    save_file = event + "_face.jpg"
-    print("イメージファイル: {} // {}".format(image_file, save_file))
-
-    # 元画像の保存場所をパスとして保管
-    image_path = "static/" + image_file
-    print("イメージパス: {}".format(image_path))
-
-    # 加工済みの画像の保存場所をパスとして保管
-    output_path = "static/" + save_file
-    print("アウトプットパス: {}".format(output_path))
+    
+    image_path, output_path = get_image_path(event)
 
     # 元画像の読み込み
     img = cv2.imread(image_path)
@@ -436,17 +408,8 @@ def pixel_art(img, alpha=10, K=4):
     return sub_color(img, K)
 
 def dot_image(event):
-    image_file = event + ".jpg"
-    save_file = event + "_face.jpg"
-    print("イメージファイル: {} // {}".format(image_file, save_file))
-
-    # 元画像の保存場所をパスとして保管
-    image_path = "static/" + image_file
-    print("イメージパス: {}".format(image_path))
-
-    # 加工済みの画像の保存場所をパスとして保管
-    output_path = "static/" + save_file
-    print("アウトプットパス: {}".format(output_path))
+    
+    image_path, output_path = get_image_path(event)
 
     # 元画像の読み込み
     img = cv2.imread(image_path)
