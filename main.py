@@ -87,10 +87,10 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message4(work,work1)
     
-    
 
 
-def result_message(event):
+
+def result_message(event,reply):
     line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="処理が完了しました。ご利用ありがとうございました。"),])
 
 def text_save_id(work):
