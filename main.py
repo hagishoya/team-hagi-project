@@ -140,14 +140,14 @@ def handle_image_message(event):
     
     contents = []
     message_content = line_bot_api.get_message_content(event.message.id)
-    carousel_msg = FlexSendMessage.new_from_json_dict(carousel_json.get_carousel_message())
-    contents.append(carousel_msg)
 
     if not os.path.exists('static'):
         os.mkdir('static/')
     with open("static/" + event.message.id + ".jpg", "wb") as f:
         f.write(message_content.content)
-    
+
+    carousel_msg = FlexSendMessage.new_from_json_dict(carousel_json.get_carousel_message())
+    contents.append(carousel_msg)
     line_bot_api.reply_message(event.reply_token, messages=contents)
 
 if __name__ == "__main__":
