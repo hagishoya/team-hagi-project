@@ -19,7 +19,7 @@ def get_carousel_message():
           {
             "type": "text",
             "text": "おめめモザイク",
-            "wrap": True,
+            #"wrap": True,
             "align": "center",
             "position": "relative",
             "size": "md"
@@ -54,7 +54,7 @@ def get_carousel_message():
           {
             "type": "text",
             "text": "線画風",
-            "wrap": True,
+            #"wrap": True,
             "align": "center",
             "position": "relative",
             "size": "md"
@@ -89,7 +89,7 @@ def get_carousel_message():
           {
             "type": "text",
             "text": "イラスト風",
-            "wrap": True,
+            #"wrap": True,
             "align": "center",
             "position": "relative",
             "size": "md"
@@ -124,7 +124,7 @@ def get_carousel_message():
           {
             "type": "text",
             "text": "ドット絵風",
-            "wrap": True,
+            #"wrap": True,
             "align": "center",
             "position": "relative",
             "size": "md"
