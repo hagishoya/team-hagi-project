@@ -58,7 +58,7 @@ def handle_message(event):
         with open(path_w2) as f2:
             work1 = f2.read()
         line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="目のモザイク処理をしています..."),])
-        output_method.handle_send_message(work,work1)
+        output_method.handle_send_message(work,event.reply_token)
 
     #線画
     elif event.message.text == ">>線画風":
