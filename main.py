@@ -120,8 +120,9 @@ def flex(event):
         return
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
-        
-    line_bot_api.push_message('U0702a57cd35b16d81966cf38edfecb78', messages=messages)
+    
+    line_bot_api.reply_message(event.reply_token, messages=messages)   
+    #line_bot_api.push_message('U0702a57cd35b16d81966cf38edfecb78', messages=messages)
 
 #画像受信後処理
 @handler.add(MessageEvent, message=ImageMessage)
