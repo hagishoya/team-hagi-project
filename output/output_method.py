@@ -18,6 +18,7 @@ def handle_send_message(event,relpy):
     #mozaiku(event)
     result = mosic_change.mosic_image(event)
     reply = str(relpy)
+    print("ここも通過したじょ")
     if result:
         main.line_bot_api.reply_message(
             reply, ImageSendMessage(
