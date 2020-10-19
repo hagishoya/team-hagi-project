@@ -104,8 +104,6 @@ def text_save_reply(work):
 
 
 def carousel(event):
-    #contents = []
-
     work = event.message.id
     reply_work = event.reply_token
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
@@ -123,10 +121,7 @@ def carousel(event):
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
     
-    #contents.append(carousel)
-
     line_bot_api.reply_message(event.reply_token, messages=carousel_msg)   
-    #line_bot_api.push_message('U0702a57cd35b16d81966cf38edfecb78', messages=messages)
 
 #画像受信後処理
 @handler.add(MessageEvent, message=ImageMessage)
