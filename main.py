@@ -104,6 +104,7 @@ def text_save_reply(work):
 
 
 def flex(event):
+    contents = []
     work = event.message.id
     reply_work = event.reply_token
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
@@ -114,14 +115,16 @@ def flex(event):
     json_open = open('carousel.json', 'r')
     json_data = json.load(json_open)
  
-    messages = FlexSendMessage(alt_text="test", contents=json_data)
-    print("フレックスメッセージ中身: {}".format(messages))
+    carousel = FlexSendMessage(alt_text="test", contents=json_data)
+    print("フレックスメッセージ中身: {}".format(carousel))
     if event.reply_token == "00000000000000000000000000000000":
         return
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
     
-    line_bot_api.reply_message(event.reply_token, messages=messages)   
+    contents.append(carousel)
+
+    line_bot_api.reply_message(event.reply_token, messages=carousel)   
     #line_bot_api.push_message('U0702a57cd35b16d81966cf38edfecb78', messages=messages)
 
 #画像受信後処理
