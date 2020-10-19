@@ -3,7 +3,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImageMessage, FlexSendMessage,CarouselContainer,BubbleContainer
 from image_change import mosic_change, art_change, dot_change, illust_change
-from output import output_method, carousel_json
+from output import output_method
 import json
 import os
 import cv2
@@ -103,52 +103,47 @@ def text_save_reply(work):
         f.write(s)
 
 
-# def carousel(event):
-#     contents = []
-#     carousel_msg = FlexSendMessage.new_from_json_dict(carousel_json.get_carousel_message())
-#     contents.append(carousel_msg)
-#     line_bot_api.reply_message(event.reply_token, messages=contents)
+def carousel(event):
+    contents = []
 
-    # contents = []
-    # work = event.message.id
-    # reply_work = event.reply_token
-    # print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    # text_save_id(work)
-    # text_save_reply(reply_work)
+    work = event.message.id
+    reply_work = event.reply_token
+    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
+    text_save_id(work)
+    text_save_reply(reply_work)
 
-    # # Json展開
-    # json_open = open('carousel.json', 'r')
-    # json_data = json.load(json_open)
+    # Json展開
+    json_open = open('carousel.json', 'r')
+    json_data = json.load(json_open)
  
-    # carousel = FlexSendMessage(alt_text="test", contents=json_data)
-    # print("フレックスメッセージ中身: {}".format(carousel))
-    # if event.reply_token == "00000000000000000000000000000000":
-    #     return
-    # if event.reply_token == "ffffffffffffffffffffffffffffffff":
-    #     return
-    
-    # contents.append(carousel)
+    carousel = FlexSendMessage(alt_text="test", contents=json_data)
 
-    # line_bot_api.reply_message(event.reply_token, messages=carousel)   
-    # #line_bot_api.push_message('U0702a57cd35b16d81966cf38edfecb78', messages=messages)
+    print("フレックスメッセージ中身: {}".format(carousel))
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+    
+    contents.append(carousel)
+
+    line_bot_api.reply_message(event.reply_token, messages=contents)   
+    #line_bot_api.push_message('U0702a57cd35b16d81966cf38edfecb78', messages=messages)
 
 #画像受信後処理
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
     print("メッセージID")
     print(event.message.id)
-    
-    contents = []
+
     message_content = line_bot_api.get_message_content(event.message.id)
 
     if not os.path.exists('static'):
         os.mkdir('static/')
     with open("static/" + event.message.id + ".jpg", "wb") as f:
         f.write(message_content.content)
+    
+    carousel(event)
 
-    carousel_msg = FlexSendMessage.new_from_json_dict(carousel_json.get_carousel_message())
-    contents.append(carousel_msg)
-    line_bot_api.reply_message(event.reply_token, messages=contents)
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
