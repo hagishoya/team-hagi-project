@@ -48,7 +48,7 @@ def mosaic(img, alpha):
     return img
 
 # ドット絵化
-def pixel_art(img, alpha=10, K=4):
+def pixel_art(img, alpha=50, K=4):
     # モザイク処理
     img = mosaic(img, alpha)
 
