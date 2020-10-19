@@ -57,11 +57,8 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-
-        
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="目のモザイク処理をしています..."),],
-        output_method.handle_send_message(work,event.reply_token))
-        #output_method.handle_send_message(work,event.reply_token)
+        #line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="目のモザイク処理をしています..."),])
+        output_method.handle_send_message(work,event.reply_token)
 
     #線画
     elif event.message.text == ">>線画風":
@@ -70,8 +67,8 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="画像を線画化しています..."),])
-        output_method.handle_send_message2(work,work1)
+        #line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="画像を線画化しています..."),])
+        output_method.handle_send_message(work,event.reply_token)
 
     #イラスト風
     elif event.message.text == ">>イラスト風":
@@ -80,8 +77,8 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="イラスト風に変更しています..."),])
-        output_method.handle_send_message3(work,work1)
+        #line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="イラスト風に変更しています..."),])
+        output_method.handle_send_message(work,event.reply_token)
 
     #ドット絵
     elif event.message.text == ">>ドット絵風":
@@ -90,8 +87,8 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="ドット絵風に変更しています..."),])
-        output_method.handle_send_message4(work,work1)
+        #line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="ドット絵風に変更しています..."),])
+        output_method.handle_send_message(work,event.reply_token)
     
 def text_save_id(work):
     s = work

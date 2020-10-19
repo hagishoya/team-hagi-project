@@ -1,3 +1,4 @@
+def get_test_data():
 {
   "type": "bubble",
   "hero": {
