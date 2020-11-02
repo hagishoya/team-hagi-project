@@ -19,12 +19,13 @@ def handle_send_message(event,relpy):
     result = mosic_change.mosic_image(event)
     reply = str(relpy)
     print("ここも通過したじょ")
-    main.line_bot_api.reply_message(
-        reply, ImageSendMessage(
-            original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
-            preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
-        )
-        )
+    message = []
+    message.append(TextSendMessage(text = "画像を加工中です..."))
+    message.append(ImageSendMessage(
+        original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
+        preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",))
+    message.append(TextSendMessage(text = "加工が終了しました。"))
+    main.line_bot_api.reply_message(reply,message)
     # else:
     #     handle_textmessage(event)
 
