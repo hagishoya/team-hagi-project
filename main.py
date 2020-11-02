@@ -17,11 +17,11 @@ path_w2 = 'savereply.txt'
 app = Flask(__name__)
 
 # トークン情報もろもろ
-YOUR_CHANNEL_ACCESS_TOKEN = "21MB2pzMrEs0JNqAdPTPyxFJmnaljipr9bLiUuMJrPWaLeCPHmK1tnqK23FoVL9kjqnpmyaJ0jFu3/KBCKl+O0WKIYzZ6lqfNEcAGaw3ag8aOwVlNzFsgmgVjiyewGsJOjnlogELVfGGTqz/PRJimwdB04t89/1O/w1cDnyilFU="
-YOUR_CHANNEL_SECRET = "b392c7fd703eba783a31c2c6cb80a890"
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ['YOUR_CHANNEL_ACCESS_TOKEN']
+YOUR_CHANNEL_SECRET = os.environ['YOUR_CHANNEL_SECRET']
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
-FQDN = " https://team-hagi-project.herokuapp.com"
+FQDN = os.environ['FQDN']
 cascade_path = "haarcascade_frontalface_default.xml"
 cascade_eye_path = "haarcascade_eye.xml"
 
@@ -104,6 +104,7 @@ def text_save_reply(work):
 
 
 def carousel(event):
+    message = []
     work = event.message.id
     reply_work = event.reply_token
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
@@ -113,15 +114,16 @@ def carousel(event):
     # Json展開
     json_open = open('carousel.json', 'r')
     json_data = json.load(json_open)
- 
-    carousel_msg = FlexSendMessage(alt_text="test", contents=json_data)
+
+    message.append(TextSendMessage(text = "メニューを選択してね"))
+    message.append(FlexSendMessage(alt_text="test", contents=json_data))
 
     if event.reply_token == "00000000000000000000000000000000":
         return
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
     
-    line_bot_api.reply_message(event.reply_token, messages=carousel_msg)   
+    line_bot_api.reply_message(event.reply_token, message)   
 
 #画像受信後処理
 @handler.add(MessageEvent, message=ImageMessage)

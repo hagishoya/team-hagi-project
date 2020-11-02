@@ -34,35 +34,35 @@ def handle_send_message2(event,reply):
     plt.set_cmap("gray")
     result = art_change.art_image(event)
     reply = str(reply)
-    # if result:
-    main.line_bot_api.reply_message(
-        reply, ImageSendMessage(
-            original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
-            preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
-        )
-        )
-    # else:
-    #     handle_textmessage(event)
+    message = []
+    message.append(TextSendMessage(text = "画像を加工中です..."))
+    message.append(ImageSendMessage(
+        original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
+        preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",))
+    message.append(TextSendMessage(text = "加工が終了しました。"))
+    main.line_bot_api.reply_message(reply,message)
     
 # イラスト送信
 def handle_send_message3(event,relpy):
     result = illust_change.illust_image(event)
     reply = str(relpy)
-    main.line_bot_api.reply_message(
-        reply, ImageSendMessage(
-            original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
-            preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
-        )
-        )
+    message = []
+    message.append(TextSendMessage(text = "画像を加工中です..."))
+    message.append(ImageSendMessage(
+        original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
+        preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",))
+    message.append(TextSendMessage(text = "加工が終了しました。"))
+    main.line_bot_api.reply_message(reply,message)
 
 # ドット絵送信
 def handle_send_message4(event,relpy):
     result = dot_change.dot_image(event)
     reply = str(relpy)
-    main.line_bot_api.reply_message(
-        reply, ImageSendMessage(
-            original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
-            preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",
-        )
-        )
+    message = []
+    message.append(TextSendMessage(text = "画像を加工中です..."))
+    message.append(ImageSendMessage(
+        original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
+        preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",))
+    message.append(TextSendMessage(text = "加工が終了しました。"))
+    main.line_bot_api.reply_message(reply,message)
 ################################################################
