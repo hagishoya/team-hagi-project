@@ -134,8 +134,6 @@ def carousel(event):
 def handle_image_message(event):
     print("メッセージID")
     print(event.message.id)
-    print("ユーザーID")
-    print(event.source.user_id)
     ID = line_bot_api.get_profil(event.source.user_id)
     message_content = line_bot_api.get_message_content(event.message.id)
     print("ユーザーID")
