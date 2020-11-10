@@ -6,7 +6,7 @@ from image_change import mosic_change, art_change, dot_change, illust_change
 from output import output_method
 import json
 import os
-import cv2
+#import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -43,7 +43,6 @@ def callback():
 # テキストデータを受け取ったときに走るやつ。
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    # line_bot_api.reply_message(event.reply_token,[TextSendMessage(text=event.message.text),])
     print("取得イヴェント:{}".format(event))
     print("取得イヴェントメッセージID:{}".format(event.message.id))
     print("リプライトークン：{}".format(event.reply_token))
@@ -57,7 +56,6 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        #line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="目のモザイク処理をしています..."),])
         output_method.handle_send_message(work,event.reply_token)
 
     #線画
@@ -67,7 +65,6 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        #line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="画像を線画化しています..."),])
         output_method.handle_send_message2(work,event.reply_token)
 
     #イラスト風
@@ -77,7 +74,6 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        #line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="イラスト風に変更しています..."),])
         output_method.handle_send_message3(work,event.reply_token)
 
     #ドット絵
@@ -87,7 +83,6 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        #line_bot_api.reply_message(event.reply_token,[TextSendMessage(text="ドット絵風に変更しています..."),])
         output_method.handle_send_message4(work,event.reply_token)
     
 def text_save_id(work):
