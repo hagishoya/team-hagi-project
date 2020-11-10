@@ -102,7 +102,8 @@ def hair_image(event):
 
     if bool:
         # 認識結果の保存
-        cv2.imwrite(output_path, image)
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        cv2.imwrite(output_path, hsv)
         #cv2.imwrite(output_path2, image)
         return True
     else:
