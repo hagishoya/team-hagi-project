@@ -7,7 +7,6 @@ from output import output_method
 import json
 import os
 import imutils
-#import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -135,14 +134,18 @@ def carousel(event):
 def handle_image_message(event):
     print("メッセージID")
     print(event.message.id)
-
+    print("ユーザーID")
+    print(event.source.user_id)
+    ID = line_bot_api.get_profil(event.source.user_id)
     message_content = line_bot_api.get_message_content(event.message.id)
+    print("ユーザーID")
+    print(ID.user_id)
 
-    if not os.path.exists(event.message.userId):
-        os.mkdir(event.message.userId + '/')
-    with open(event.message.userId + "/" + event.message.id + ".jpg", "wb") as f:
+    if not os.path.exists(ID.user_id):
+        os.mkdir(ID.user_id + '/')
+    with open(ID.user_id + "/" + event.message.id + ".jpg", "wb") as f:
         f.write(message_content.content)
-    print("userId確認用:{}".format(event.message.userId))
+    print("userId確認用:{}".format(ID.user_id))
 
 
     carousel(event)
