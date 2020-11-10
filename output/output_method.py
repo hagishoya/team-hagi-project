@@ -2,7 +2,7 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImageMessage, FlexSendMessage,CarouselContainer,BubbleContainer
-from image_change import mosic_change, art_change, dot_change, illust_change
+from image_change import mosic_change, art_change, dot_change, illust_change, hair_change
 import main
 import json
 import os
@@ -57,6 +57,18 @@ def handle_send_message3(event,relpy):
 # ドット絵送信
 def handle_send_message4(event,relpy):
     result = dot_change.dot_image(event)
+    reply = str(relpy)
+    message = []
+    message.append(TextSendMessage(text = "画像を加工中です..."))
+    message.append(ImageSendMessage(
+        original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
+        preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",))
+    message.append(TextSendMessage(text = "加工が終了しました。"))
+    main.line_bot_api.reply_message(reply,message)
+
+# 髪の毛変更test
+def handle_send_message(event,relpy):
+    result = hair_change.hair_image(event)
     reply = str(relpy)
     message = []
     message.append(TextSendMessage(text = "画像を加工中です..."))
