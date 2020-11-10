@@ -67,7 +67,7 @@ def handle_send_message4(event,relpy):
     main.line_bot_api.reply_message(reply,message)
 
 # 髪の毛変更test
-def handle_send_message(event,relpy):
+def handle_send_message5(event,relpy):
     result = hair_change.hair_image(event)
     reply = str(relpy)
     message = []
