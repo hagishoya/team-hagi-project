@@ -31,7 +31,7 @@ def handle_send_message(event,relpy,userid):
 # 線画送信
 def handle_send_message2(event,relpy,userid):
     plt.set_cmap("gray")
-    result = art_change.art_image(event)
+    result = art_change.art_image(event,userid)
     reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
@@ -44,7 +44,7 @@ def handle_send_message2(event,relpy,userid):
     
 # イラスト送信
 def handle_send_message3(event,relpy,userid):
-    result = illust_change.illust_image(event)
+    result = illust_change.illust_image(event,userid)
     reply = str(relpy)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
@@ -57,7 +57,7 @@ def handle_send_message3(event,relpy,userid):
 
 # ドット絵送信
 def handle_send_message4(event,relpy,userid):
-    result = dot_change.dot_image(event)
+    result = dot_change.dot_image(event,userid)
     reply = str(relpy)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
