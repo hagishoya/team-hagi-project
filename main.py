@@ -50,7 +50,7 @@ def handle_message(event):
     print(type(event.reply_token))
 
     #モザイク(目)
-    if event.message.text == ">>おめめモザイク":
+    if event.message.text == ">>おめめモザイク" and os.path.exists(event.message.id):
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
@@ -135,16 +135,12 @@ def handle_image_message(event):
     print("メッセージID")
     print(event.message.id)
     message_content = line_bot_api.get_message_content(event.message.id)
+    print("こんてんつ：{}".format(message_content))
 
-    if not os.path.exists(event.message.id):
-        os.mkdir(event.message.id + '/')
-    with open(event.message.id + "/" + event.message.id + ".jpg", "wb") as f:
+    if not os.path.exists('static'):
+        os.mkdir('static/')
+    with open('static/' + event.message.id + ".jpg", "wb") as f:
         f.write(message_content.content)
-
-    # if not os.path.exists('static'):
-    #     os.mkdir('static/')
-    # with open('static/' + event.message.id + ".jpg", "wb") as f:
-    #     f.write(message_content.content)
     
     carousel(event)
 
