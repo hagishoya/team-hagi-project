@@ -12,6 +12,7 @@ import numpy as np
 
 # リプライIDとイベントIDをテキストとして保存するためのやつ
 work = {}
+userId = ""
 path_w1 = 'saveid.txt'
 path_w2 = 'savereply.txt'
 app = Flask(__name__)
@@ -138,9 +139,11 @@ def handle_image_message(event):
     profile = line_bot_api.get_profile(event.source.user_id)
     print("ユーザーID：{}".format(profile.user_id))
 
-    if not os.path.exists('static'):
-        os.mkdir('static/')
-    with open('static/' + event.message.id + ".jpg", "wb") as f:
+    userId = str(profile.user_id)
+
+    if not os.path.exists(userId):
+        os.mkdir(userId + '/')
+    with open(userId + '/' + event.message.id + ".jpg", "wb") as f:
         f.write(message_content.content)
     
     carousel(event)
