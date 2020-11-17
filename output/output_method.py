@@ -4,6 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImageMessage, FlexSendMessage,CarouselContainer,BubbleContainer
 from image_change import mosic_change, art_change, dot_change, illust_change, hair_change
 import main
+import shutil
 import json
 import os
 import cv2
@@ -25,6 +26,7 @@ def handle_send_message(event,reply,userid):
         preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
     message.append(TextSendMessage(text = "加工が終了しました。"))
     main.line_bot_api.reply_message(reply,message)
+    shutil.rmtree(main.FQDN + "/static/" + userid + "/" + event)
     # else:
     #     handle_textmessage(event)
 
