@@ -100,9 +100,6 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message5(work,event.reply_token,userId)
 
-    #その他のメッセージが送信された時
-    else:
-        TextSendMessage(text = "画像を送信してください。")
     
 def text_save_id(work):
     s = work
