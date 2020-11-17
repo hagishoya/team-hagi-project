@@ -17,7 +17,7 @@ import numpy as np
 def handle_send_message(event,relpy,userid):
     result = mosic_change.mosic_image(event,userid)
     reply = str(relpy)
-    print("ここも通過したじょ")
+    print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
     message.append(TextSendMessage(text = "画像を加工中です..."))
     message.append(ImageSendMessage(
