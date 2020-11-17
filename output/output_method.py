@@ -14,9 +14,9 @@ import numpy as np
 ###------------------//画像送信処理//------------------------###
 
 #モザイク送信
-def handle_send_message(event,relpy,userid):
+def handle_send_message(event,reply,userid):
     result = mosic_change.mosic_image(event,userid)
-    reply = str(relpy)
+    reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
     message.append(TextSendMessage(text = "画像を加工中です..."))
@@ -29,10 +29,10 @@ def handle_send_message(event,relpy,userid):
     #     handle_textmessage(event)
 
 # 線画送信
-def handle_send_message2(event,relpy,userid):
+def handle_send_message2(event,reply,userid):
     plt.set_cmap("gray")
     result = art_change.art_image(event,userid)
-    reply = str(relpy)
+    reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
     message.append(TextSendMessage(text = "画像を加工中です..."))
@@ -43,9 +43,9 @@ def handle_send_message2(event,relpy,userid):
     main.line_bot_api.reply_message(reply,message)
     
 # イラスト送信
-def handle_send_message3(event,relpy,userid):
+def handle_send_message3(event,reply,userid):
     result = illust_change.illust_image(event,userid)
-    reply = str(relpy)
+    reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
     message.append(TextSendMessage(text = "画像を加工中です..."))
@@ -56,9 +56,9 @@ def handle_send_message3(event,relpy,userid):
     main.line_bot_api.reply_message(reply,message)
 
 # ドット絵送信
-def handle_send_message4(event,relpy,userid):
+def handle_send_message4(event,reply,userid):
     result = dot_change.dot_image(event,userid)
-    reply = str(relpy)
+    reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
     message.append(TextSendMessage(text = "画像を加工中です..."))
@@ -69,14 +69,15 @@ def handle_send_message4(event,relpy,userid):
     main.line_bot_api.reply_message(reply,message)
 
 # # 髪の毛変更test
-# def handle_send_message5(event,relpy):
-#     result = hair_change.hair_image(event)
-#     reply = str(relpy)
-#     message = []
-#     message.append(TextSendMessage(text = "画像を加工中です..."))
-#     message.append(ImageSendMessage(
-#         original_content_url=main.FQDN + "/static/" + event + "_face.jpg",
-#         preview_image_url=main.FQDN + "/static/" + event + "_face.jpg",))
-#     message.append(TextSendMessage(text = "加工が終了しました。"))
-#     main.line_bot_api.reply_message(reply,message)
+def handle_send_message5(event,reply,userid):
+    result = hair_change.hair_image(event,userid)
+    reply = str(reply)
+    print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
+    message = []
+    message.append(TextSendMessage(text = "画像を加工中です..."))
+    message.append(ImageSendMessage(
+        original_content_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",
+        preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
+    message.append(TextSendMessage(text = "加工が終了しました。"))
+    main.line_bot_api.reply_message(reply,message)
 ################################################################
