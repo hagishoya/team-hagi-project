@@ -139,7 +139,7 @@ def handle_image_message(event):
     profile = line_bot_api.get_profile(event.source.user_id)
     print("ユーザーID：{}".format(profile.user_id))
 
-    userId = str(profile.user_id)
+    userId = profile.user_id
 
     if not os.path.exists(userId):
         os.mkdir(userId + '/')
