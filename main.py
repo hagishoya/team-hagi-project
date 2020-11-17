@@ -135,7 +135,8 @@ def handle_image_message(event):
     print("メッセージID")
     print(event.message.id)
     message_content = line_bot_api.get_message_content(event.message.id)
-    print("こんてんつ：{}".format(message_content))
+    profile = line_bot_api.get_profile(event.source.user_id)
+    print("ユーザーID：{}".format(profile.user_id))
 
     if not os.path.exists('static'):
         os.mkdir('static/')
