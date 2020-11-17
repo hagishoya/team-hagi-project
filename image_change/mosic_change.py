@@ -14,9 +14,9 @@ import path_data
 ################################################################
 ###-------------------------モザイク--------------------------###
 
-def mosic_image(event):
+def mosic_image(event,userid):
     bool = True
-    image_path, output_path = path_data.get_image_path(event)
+    image_path, output_path = path_data.get_image_path(event,userid)
 
     # ファイル読み込みo
     image = cv2.imread(image_path)

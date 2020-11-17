@@ -12,7 +12,6 @@ import numpy as np
 
 # リプライIDとイベントIDをテキストとして保存するためのやつ
 work = {}
-userId = ""
 path_w1 = 'saveid.txt'
 path_w2 = 'savereply.txt'
 app = Flask(__name__)
@@ -50,6 +49,12 @@ def handle_message(event):
     print("------リプライ型------")
     print(type(event.reply_token))
 
+    profile = line_bot_api.get_profile(event.source.user_id)
+    print("ユーザーID：{}".format(profile.user_id))
+
+    userId = profile.user_id
+
+
     #モザイク(目)
     if event.message.text == ">>おめめモザイク":
         print("通過: {}".format(event.message.text))
@@ -57,7 +62,7 @@ def handle_message(event):
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message(work,event.reply_token)
+        output_method.handle_send_message(work,event.reply_token,userId)
 
     #線画
     elif event.message.text == ">>線画風":

@@ -14,9 +14,8 @@ import numpy as np
 ###------------------//画像送信処理//------------------------###
 
 #モザイク送信
-def handle_send_message(event,relpy):
-    #mozaiku(event)
-    result = mosic_change.mosic_image(event)
+def handle_send_message(event,relpy,userid):
+    result = mosic_change.mosic_image(event,userid)
     reply = str(relpy)
     print("ここも通過したじょ")
     message = []
