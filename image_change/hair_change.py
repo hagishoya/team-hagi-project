@@ -57,9 +57,9 @@ def is_bold(pnt, hair_mask):
         print("Not Bold")
         return False
 
-def hair_image(event):
+def hair_image(event,userid):
 
-    image_path, output_path = path_data.get_image_path(event)
+    image_path, output_path = path_data.get_image_path(event,userid)
 
     image = cv2.imread(image_path)     # Load image
     image = imutils.resize(image, height=500)     # We result in 500px in height

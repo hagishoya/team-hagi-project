@@ -65,31 +65,31 @@ def handle_message(event):
         output_method.handle_send_message(work,event.reply_token,userId)
 
     #線画
-    elif event.message.text == ">>線画風":
+    elif event.message.text == ">>線画風" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message2(work,event.reply_token)
+        output_method.handle_send_message2(work,event.reply_token,userId)
 
     #イラスト風
-    elif event.message.text == ">>イラスト風":
+    elif event.message.text == ">>イラスト風" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message3(work,event.reply_token)
+        output_method.handle_send_message3(work,event.reply_token,userId)
 
     #ドット絵
-    elif event.message.text == ">>ドット絵風":
+    elif event.message.text == ">>ドット絵風" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message4(work,event.reply_token)
+        output_method.handle_send_message4(work,event.reply_token,userId)
     
     # #髪の毛test
     # elif event.message.text == ">>test":

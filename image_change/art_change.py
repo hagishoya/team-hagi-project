@@ -13,9 +13,9 @@ import path_data
 
 ################################################################
 ###-------------------------線画化風--------------------------###
-def art_image(event):
+def art_image(event,userid):
 
-    image_path, output_path = path_data.get_image_path(event)
+    image_path, output_path = path_data.get_image_path(event,userid)
 
     # カーネルを定義
     kernel = np.ones((5,5), np.uint8)

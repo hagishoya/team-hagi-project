@@ -55,9 +55,9 @@ def pixel_art(img, alpha=50, K=4):
     # 減色処理
     return sub_color(img, K)
 
-def dot_image(event):
+def dot_image(event,userid):
     
-    image_path, output_path = path_data.get_image_path(event)
+    image_path, output_path = path_data.get_image_path(event,userid)
 
     # 元画像の読み込み
     img = cv2.imread(image_path)
