@@ -51,7 +51,7 @@ def handle_message(event):
     print(type(event.reply_token))
 
     #モザイク(目)
-    if event.message.text == ">>おめめモザイク" and os.path.exists(event.message.id):
+    if event.message.text == ">>おめめモザイク" and os.path.exists(userId):
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
