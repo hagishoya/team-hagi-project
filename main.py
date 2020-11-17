@@ -56,7 +56,7 @@ def handle_message(event):
 
 
     #モザイク(目)
-    if event.message.text == ">>おめめモザイク":
+    if event.message.text == ">>おめめモザイク" and os.path.exists(userId):
         print("通過: {}".format(event.message.text))
         with open(path_w1) as f:
             work = f.read()
@@ -150,7 +150,7 @@ def handle_image_message(event):
         os.mkdir(userId + '/')
     with open(userId + '/' + event.message.id + ".jpg", "wb") as f:
         f.write(message_content.content)
-    
+    print(FQDN + "/"+ userId + "/" + event.message.id + "_face.jpg")
     carousel(event)
 
 
