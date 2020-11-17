@@ -85,14 +85,14 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message4(work,event.reply_token)
     
-    #髪の毛test
-    elif event.message.text == ">>test":
-        print("通過: {}".format(event.message.text))
-        with open(path_w1) as f:
-            work = f.read()
-        with open(path_w2) as f2:
-            work1 = f2.read()
-        output_method.handle_send_message5(work,event.reply_token)
+    # #髪の毛test
+    # elif event.message.text == ">>test":
+    #     print("通過: {}".format(event.message.text))
+    #     with open(path_w1) as f:
+    #         work = f.read()
+    #     with open(path_w2) as f2:
+    #         work1 = f2.read()
+    #     output_method.handle_send_message5(work,event.reply_token)
     
 def text_save_id(work):
     s = work
