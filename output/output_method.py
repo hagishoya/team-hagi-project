@@ -21,8 +21,8 @@ def handle_send_message(event,relpy,userid):
     message = []
     message.append(TextSendMessage(text = "画像を加工中です..."))
     message.append(ImageSendMessage(
-        original_content_url=main.FQDN + "/"+ main.userId + "/" + event + "_face.jpg",
-        preview_image_url=main.FQDN + "/"+ main.userId + "/" + event + "_face.jpg",))
+        original_content_url=main.FQDN + "/"+ userid + "/" + event + "_face.jpg",
+        preview_image_url=main.FQDN + "/"+ userid + "/" + event + "_face.jpg",))
     message.append(TextSendMessage(text = "加工が終了しました。"))
     main.line_bot_api.reply_message(reply,message)
     # else:
