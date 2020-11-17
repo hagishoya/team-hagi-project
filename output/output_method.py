@@ -32,7 +32,7 @@ def handle_send_message(event,relpy,userid):
 def handle_send_message2(event,relpy,userid):
     plt.set_cmap("gray")
     result = art_change.art_image(event,userid)
-    reply = str(reply)
+    reply = str(relpy)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
     message.append(TextSendMessage(text = "画像を加工中です..."))
