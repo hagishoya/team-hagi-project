@@ -26,7 +26,7 @@ def handle_send_message(event,reply,userid):
         preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
     message.append(TextSendMessage(text = "加工が終了しました。"))
     main.line_bot_api.reply_message(reply,message)
-    shutil.rmtree("static/" + userid)
+    #shutil.rmtree("static/" + userid)
     # else:
     #     handle_textmessage(event)
 
@@ -43,7 +43,7 @@ def handle_send_message2(event,reply,userid):
         preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
     message.append(TextSendMessage(text = "加工が終了しました。"))
     main.line_bot_api.reply_message(reply,message)
-    shutil.rmtree("static/" + userid)
+    #shutil.rmtree("static/" + userid)
     
 # イラスト送信
 def handle_send_message3(event,reply,userid):
@@ -57,7 +57,7 @@ def handle_send_message3(event,reply,userid):
         preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
     message.append(TextSendMessage(text = "加工が終了しました。"))
     main.line_bot_api.reply_message(reply,message)
-    shutil.rmtree("static/" + userid)
+    #shutil.rmtree("static/" + userid)
 
 # ドット絵送信
 def handle_send_message4(event,reply,userid):
@@ -71,7 +71,7 @@ def handle_send_message4(event,reply,userid):
         preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
     message.append(TextSendMessage(text = "加工が終了しました。"))
     main.line_bot_api.reply_message(reply,message)
-    shutil.rmtree("static/" + userid)
+    #shutil.rmtree("static/" + userid)
 
 # # 髪の毛変更test
 def handle_send_message5(event,reply,userid):
@@ -85,5 +85,5 @@ def handle_send_message5(event,reply,userid):
         preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
     message.append(TextSendMessage(text = "加工が終了しました。"))
     main.line_bot_api.reply_message(reply,message)
-    shutil.rmtree("static/" + userid)
+    #shutil.rmtree("static/" + userid)
 ################################################################
