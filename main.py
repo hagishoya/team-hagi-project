@@ -147,10 +147,10 @@ def handle_image_message(event):
     userId = profile.user_id
 
     if not os.path.exists("static/" + userId):
-        os.mkdir("static/" + userId)
+        os.makedirs("static/" + userId)
     with open("static/" + userId + '/' + event.message.id + ".jpg", "wb") as f:
         f.write(message_content.content)
-    print(FQDN + "/static/"+ userId + "/" + event.message.id + "_face.jpg")
+    print(FQDN + "/static/"+ userId + "/" + event.message.id + ".jpg")
     carousel(event)
 
 
