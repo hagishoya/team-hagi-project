@@ -33,7 +33,8 @@ def handle_send_message(event,reply,userid):
         #shutil.rmtree("static/" + userid)
     else:
         message = []
-        message.append(TextSendMessage(text = "目が検出できませんでした"))
+        message.append(TextSendMessage(text = "目を検知できませんでした。"))
+        message.append(TextSendMessage(text = "他の画像を選択してください。"))
         main.line_bot_api.reply_message(reply,message)
 
 
