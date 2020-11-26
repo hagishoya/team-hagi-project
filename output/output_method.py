@@ -14,14 +14,7 @@ import numpy as np
 ################################################################
 ###------------------//画像送信処理//------------------------###
 
-def handle_textmessage(event):
-    main.line_bot_api.reply_message(event.reply_token,
-    [
-        #TextSendMessage(text=event.message.text),
-        TextSendMessage(text="目を検知できませんでした。"),
-        #TextSendMessage(text=event.message.id),
-    ]
-    )
+
 
 #モザイク送信
 def handle_send_message(event,reply,userid):
@@ -39,7 +32,9 @@ def handle_send_message(event,reply,userid):
         main.line_bot_api.reply_message(reply,message)
         #shutil.rmtree("static/" + userid)
     else:
-        handle_textmessage(event)
+        message = []
+        message.append(TextSendMessage(text = "目が検出できませんでした"))
+        main.line_bot_api.reply_message(reply,message)
 
 
 
