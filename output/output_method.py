@@ -14,21 +14,34 @@ import numpy as np
 ################################################################
 ###------------------//画像送信処理//------------------------###
 
+def handle_textmessage(event):
+    main.line_bot_api.reply_message(event.reply_token,
+    [
+        #TextSendMessage(text=event.message.text),
+        TextSendMessage(text="目を検知できませんでした。"),
+        #TextSendMessage(text=event.message.id),
+    ]
+    )
+
 #モザイク送信
 def handle_send_message(event,reply,userid):
     result = mosic_change.mosic_image(event,userid)
     reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
-    message = []
-    message.append(TextSendMessage(text = "画像を加工中です..."))
-    message.append(ImageSendMessage(
-        original_content_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",
-        preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
-    message.append(TextSendMessage(text = "加工が終了しました。"))
-    main.line_bot_api.reply_message(reply,message)
-    #shutil.rmtree("static/" + userid)
-    # else:
-    #     handle_textmessage(event)
+    
+    if result:
+        message = []
+        message.append(TextSendMessage(text = "画像を加工中です..."))
+        message.append(ImageSendMessage(
+            original_content_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",
+            preview_image_url=main.FQDN + "/static/" + userid + "/" + event + "_face.jpg",))
+        message.append(TextSendMessage(text = "加工が終了しました。"))
+        main.line_bot_api.reply_message(reply,message)
+        #shutil.rmtree("static/" + userid)
+    else:
+        handle_textmessage(event)
+
+
 
 # 線画送信
 def handle_send_message2(event,reply,userid):
