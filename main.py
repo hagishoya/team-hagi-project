@@ -153,6 +153,7 @@ def handle_image_message(event):
         f.write(message_content.content)
     print(FQDN + "/static/"+ userId + "/" + event.message.id + ".jpg")
     carousel(event)
+    print()
 
 
 if __name__ == "__main__":
