@@ -26,7 +26,6 @@ cascade_path = "haarcascade_frontalface_default.xml"
 cascade_eye_path = "haarcascade_eye.xml"
 
 
-
 @app.route("/callback", methods=["POST"])
 def callback():
     signature = request.headers["X-Line-Signature"]
