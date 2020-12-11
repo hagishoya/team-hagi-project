@@ -349,8 +349,7 @@ def change_image2(event):
     image = cv2.imread(image_path)     # Load image
     image = imutils.resize(image, height=500)     # We result in 500px in height
     mask = get_head_mask(image)      # We get the mask of the head (without BG)
-    cv2.imwrite(output_path, mask)
-    return True
+    
     # Find the contours, take the largest one and memorize its upper point as the top of the head
     cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
     cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
@@ -369,7 +368,8 @@ def change_image2(event):
     mask = cv2.dilate(mask, kernel1, iterations=1)
     i1 = cv2.bitwise_and(image, image, mask=mask)
 
-
+    cv2.imwrite(output_path, mask)
+    return True
     # 髪の毛なし
     if is_bold(topmost,mask):
         cv2.rectangle(image,topmost,topmost,(0,0,255),5)
