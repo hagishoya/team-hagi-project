@@ -364,6 +364,7 @@ def change_image2(event):
     skinMask = cv2.inRange(converted, lower, upper)     # Write a mask from places where the color is between the outside
     mask[skinMask == 255] = 0   # We remove the face mask from the mask of the head
 
+
     kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
     mask = cv2.dilate(mask, kernel1, iterations=1)
     i1 = cv2.bitwise_and(image, image, mask=mask)
