@@ -368,8 +368,8 @@ def change_image2(event):
     mask = cv2.dilate(mask, kernel1, iterations=1)
     i1 = cv2.bitwise_and(image, image, mask=mask)
 
-    cv2.imwrite(output_path, il)
-    return True
+    
+    
     # 髪の毛なし
     if is_bold(topmost,mask):
         cv2.rectangle(image,topmost,topmost,(0,0,255),5)
