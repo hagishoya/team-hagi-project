@@ -396,7 +396,7 @@ def change_image2(event):
     output1 = res1.reshape((img2.shape))
 
     cv2.circle(output1, (250, topmost_y + 20), 5, (0,0,255), -1)
-    cv2.imwrite(output_path, image1)
+    cv2.imwrite(output_path, output1)
     return True
     #-----------------------------------------------------------------------------------
     #image = imutils.resize(image, height=500)     # We result in 500px in height
