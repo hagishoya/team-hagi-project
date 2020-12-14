@@ -355,15 +355,21 @@ def change_image2(event):
     image = imutils.resize(image, height=500)     # We result in 500px in height
     mask = get_head_mask(image)      # We get the mask of the head (without BG)
     
-
+    gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+    ret,thresh = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
+    contours,hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contimg=cv2.drawContours(image,contours,-1,(0,255,0),3)
+    cv2.imwrite(output_path, contimg)
+    return True
     # Find the contours, take the largest one and memorize its upper point as the top of the head
-    cnts[0],cnts[1] = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
-    print("cnts[0]{}".format(cnts[0]))
-    print("cnts[1]{}".format(cnts[1]))
-    cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
-    cnt=cnts[0]
-    topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
-    print("topmost{}".format(topmost))
+    #cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
+    #print("cnts{}".format(cnts))
+    #cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+    #print("cnts{}".format(cnts))
+    #cnt=cnts[0]
+    #topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
+    #print("topmost{}".format(topmost))
+
 
     # We remove the face by the color of the skin
     lower = np.array([0, 0, 100], dtype="uint8")  # Lower limit of skin color
