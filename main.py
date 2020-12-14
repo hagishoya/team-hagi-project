@@ -395,7 +395,7 @@ def change_image2(event):
     res1 = center1[label1.flatten()]
     output1 = res1.reshape((img2.shape))
 
-    cv2.circle(output1, (250, topmost_y + 20), 5, (0,0,255), -1)
+    #cv2.circle(output1, (250, topmost_y + 20), 5, (0,0,255), -1)
     cv2.imwrite(output_path, output1)
     return True
     #-----------------------------------------------------------------------------------
