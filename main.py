@@ -383,6 +383,7 @@ def change_image2(event):
 
     image1 = cv2.imread(image_path)     # Load image
     #Resizing Image for fixed width
+    #固定幅の画像のサイズ変更
 
     img1 = image_resize(image1, width = 500)
 
@@ -390,6 +391,7 @@ def change_image2(event):
     cv2.waitKey(0)
 
     #Detecting Edge of image
+    #画像のエッジを検出する
     canny = cv2.Canny(img1, 100, 150)
 
     cv2.imshow("Edge", canny)
@@ -399,6 +401,7 @@ def change_image2(event):
 
     topmost_y = np.min(coords[0])
     #Blurring effect
+    #ぼかし効果
 
     img2 = cv2.medianBlur(img1, 5)
 
@@ -406,15 +409,14 @@ def change_image2(event):
     cv2.waitKey(0)
 
     #K-mean approach
+    #K-meanアプローチ
     Z = img2.reshape((-1,3))
     Z = np.float32(Z)
 
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
 
     K=4
-    ret, label1, center1 = cv2.kmeans(Z, K, None,
-                                              criteria, 10, 
-    cv2.KMEANS_RANDOM_CENTERS)
+    ret, label1, center1 = cv2.kmeans(Z, K, None,criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
     center1 = np.uint8(center1)
     res1 = center1[label1.flatten()]
     output1 = res1.reshape((img2.shape))
