@@ -339,37 +339,11 @@ def is_bold(pnt, hair_mask):
 
 def hsv2rgb(h,s,v):
     return (round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
-def image_resize(image1, width = None, height = None, inter = 
-cv2.INTER_AREA):
-    # initialize the dimensions of the image to be resized and
-    # grab the image size
-    dim = None
-    (h, w) = image1.shape[:2]
 
-    # if both the width and height are None, then return the
-    # original image
-    if width is None and height is None:
-        return image1
 
-    # check to see if the width is None
-    if width is None:
-        # calculate the ratio of the height and construct the
-        # dimensions
-        r = height / float(h)
-        dim = (int(w * r), height)
 
-    # otherwise, the height is None
-    else:
-        # calculate the ratio of the width and construct the
-        # dimensions
-        r = width / float(w)
-        dim = (width, int(h * r))
 
-    # resize the image
-    resized = cv2.resize(image1, dim, interpolation = inter)
 
-    # return the resized image
-    return resized
 def change_image2(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
@@ -491,6 +465,40 @@ def change_image2(event):
     #else:
     #    return False
     #
+
+
+
+def image_resize(image1, width = None, height = None, inter = 
+cv2.INTER_AREA):
+    # initialize the dimensions of the image to be resized and
+    # grab the image size
+    dim = None
+    (h, w) = image1.shape[:2]
+
+    # if both the width and height are None, then return the
+    # original image
+    if width is None and height is None:
+        return image1
+
+    # check to see if the width is None
+    if width is None:
+        # calculate the ratio of the height and construct the
+        # dimensions
+        r = height / float(h)
+        dim = (int(w * r), height)
+
+    # otherwise, the height is None
+    else:
+        # calculate the ratio of the width and construct the
+        # dimensions
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    # resize the image
+    resized = cv2.resize(image1, dim, interpolation = inter)
+
+    # return the resized image
+    return resized
 
 
 if __name__ == "__main__":
