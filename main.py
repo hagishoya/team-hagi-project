@@ -357,12 +357,11 @@ def change_image2(event):
     
 
     # Find the contours, take the largest one and memorize its upper point as the top of the head
-    cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
-    print("cnts{}".format(cnts))
+    cnts[0],cnts[1] = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
+    print("cnts[0]{}".format(cnts[0]))
+    print("cnts[1]{}".format(cnts[1]))
     cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
-    print("cnts{}".format(cnts))
     cnt=cnts[0]
-    print("cnts{}".format(cnts))
     topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
     print("topmost{}".format(topmost))
 
