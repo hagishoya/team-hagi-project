@@ -395,7 +395,23 @@ def change_image2(event):
     res1 = center1[label1.flatten()]
     output1 = res1.reshape((img2.shape))
 
-    #cv2.circle(output1, (250, topmost_y + 20), 5, (0,0,255), -1)
+    cv2.circle(output1, (250, topmost_y + 20), 5, (0,0,255), -1)
+    # find the index of the cluster of the hair
+    #髪の毛のクラスターのインデックスを見つける
+    mask = label1.reshape(output1.shape[:-1])
+    khair = mask[(topmost_y + 20, 250)]
+
+    # get a mask that's True at all of the indices of hair's group
+    #髪の毛のグループのすべてのインデックスでTrueであるマスクを取得します
+    hairmask = mask==khair
+
+        # get the hair's cluster's xy coordinates
+        #ヘアのクラスターのxy座標を取得します
+    xyhair = hairmask.nonzero()
+
+    # plot an image with only the hair's cluster on a white background
+    #白い背景に髪の毛のクラスターのみを含む画像をプロットします
+    cv2.imwrite("khair.jpg", np.where(hairmask[..., None], img1, [255,255,255]))
     cv2.imwrite(output_path, output1)
     return True
     #-----------------------------------------------------------------------------------
