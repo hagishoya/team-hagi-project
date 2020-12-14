@@ -280,16 +280,21 @@ def get_head_mask(img):
     :return:   Returns the mask with the cut out BG
     """
     mask = np.zeros(img.shape[:2], np.uint8)
+    print("mask{}".format(mask))
     bgdModel = np.zeros((1, 65), np.float64)
+    print("bgdModel{}".format(bgdModel))
     fgdModel = np.zeros((1, 65), np.float64)
+    print("fgdModel{}".format(fgdModel))
     faces = faceCascade.detectMultiScale(img, scaleFactor=1.1, minNeighbors=5, minSize=(50, 50))    # Find faces
+    print(faces)
     if len(faces) != 0:
         x, y, w, h = faces[0]
         (x, y, w, h) = (x - 40, y - 100, w + 80, h + 200)
         rect1 = (x, y, w, h)
+        print("rect1{}".format(rect1))
         cv2.grabCut(img, mask, rect1, bgdModel, fgdModel, 5, cv2.GC_INIT_WITH_RECT)     #Crop BG around the head
     mask2 = np.where((mask == 2) | (mask == 0), 0, 1).astype('uint8')  # Take the mask from BG
-
+    print("mask2{}".format(mask2))
     return mask2
 
 def is_bold(pnt, hair_mask):
@@ -349,7 +354,9 @@ def change_image2(event):
     image = cv2.imread(image_path)     # Load image
     image = imutils.resize(image, height=500)     # We result in 500px in height
     mask = get_head_mask(image)      # We get the mask of the head (without BG)
-    
+    cv2.imwrite(output_path, mask)
+    return True
+
     # Find the contours, take the largest one and memorize its upper point as the top of the head
     cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
     cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
@@ -369,7 +376,6 @@ def change_image2(event):
     mask = cv2.dilate(mask, kernel1, iterations=1)
     i1 = cv2.bitwise_and(image, image, mask=mask)
 
-    
     
     # 髪の毛なし
     if is_bold(topmost,mask):
