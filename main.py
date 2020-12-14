@@ -411,8 +411,8 @@ def change_image2(event):
 
     # plot an image with only the hair's cluster on a white background
     #白い背景に髪の毛のクラスターのみを含む画像をプロットします
-    cv2.imwrite("khair.jpg", np.where(hairmask[..., None], img1, [255,255,255]))
-    cv2.imwrite(output_path, output1)
+    cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
+    #cv2.imwrite(output_path, output1)
     return True
     #-----------------------------------------------------------------------------------
     #image = imutils.resize(image, height=500)     # We result in 500px in height
