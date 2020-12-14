@@ -339,7 +339,37 @@ def is_bold(pnt, hair_mask):
 
 def hsv2rgb(h,s,v):
     return (round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
+def image_resize(image1, width = None, height = None, inter = 
+cv2.INTER_AREA):
+    # initialize the dimensions of the image to be resized and
+    # grab the image size
+    dim = None
+    (h, w) = image1.shape[:2]
 
+    # if both the width and height are None, then return the
+    # original image
+    if width is None and height is None:
+        return image1
+
+    # check to see if the width is None
+    if width is None:
+        # calculate the ratio of the height and construct the
+        # dimensions
+        r = height / float(h)
+        dim = (int(w * r), height)
+
+    # otherwise, the height is None
+    else:
+        # calculate the ratio of the width and construct the
+        # dimensions
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    # resize the image
+    resized = cv2.resize(image1, dim, interpolation = inter)
+
+    # return the resized image
+    return resized
 def change_image2(event):
     image_file = event + ".jpg"
     save_file = event + "_face.jpg"
@@ -351,73 +381,114 @@ def change_image2(event):
     #output_path2 = "static/" + save_file2
     print("アウトプットパス: {}".format(output_path))
 
-    image = cv2.imread(image_path)     # Load image
-    image = imutils.resize(image, height=500)     # We result in 500px in height
-    mask = get_head_mask(image)      # We get the mask of the head (without BG)
-    
-    gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-    ret,thresh = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
-    contours,hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    contimg=cv2.drawContours(image,contours,-1,(0,255,0),3)
-    cv2.imwrite(output_path, contimg)
+    image1 = cv2.imread(image_path)     # Load image
+    #Resizing Image for fixed width
+
+    img1 = image_resize(image1, width = 500)
+
+    cv2.imshow("Resized", img1)
+    cv2.waitKey(0)
+
+    #Detecting Edge of image
+    canny = cv2.Canny(img1, 100, 150)
+
+    cv2.imshow("Edge", canny)
+    cv2.waitKey(0)
+
+    coords = np.nonzero(canny)
+
+    topmost_y = np.min(coords[0])
+    #Blurring effect
+
+    img2 = cv2.medianBlur(img1, 5)
+
+    cv2.imshow("Blurred", img2)
+    cv2.waitKey(0)
+
+    #K-mean approach
+    Z = img2.reshape((-1,3))
+    Z = np.float32(Z)
+
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+
+    K=4
+    ret, label1, center1 = cv2.kmeans(Z, K, None,
+                                              criteria, 10, 
+    cv2.KMEANS_RANDOM_CENTERS)
+    center1 = np.uint8(center1)
+    res1 = center1[label1.flatten()]
+    output1 = res1.reshape((img2.shape))
+
+    cv2.circle(output1, (250, topmost_y + 20), 5, (0,0,255), -1)
+    cv2.imwrite(output_path, image1)
     return True
-    # Find the contours, take the largest one and memorize its upper point as the top of the head
-    #cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
-    #print("cnts{}".format(cnts))
-    #cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
-    #print("cnts{}".format(cnts))
-    #cnt=cnts[0]
-    #topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
-    #print("topmost{}".format(topmost))
-
-
-    # We remove the face by the color of the skin
-    lower = np.array([0, 0, 100], dtype="uint8")  # Lower limit of skin color
-    upper = np.array([255, 255, 255], dtype="uint8")  # Upper skin color limit
-    converted = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)   # We translate into HSV color format
-    skinMask = cv2.inRange(converted, lower, upper)     # Write a mask from places where the color is between the outside
-    mask[skinMask == 255] = 0   # We remove the face mask from the mask of the head
-
-
-    kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-    mask = cv2.dilate(mask, kernel1, iterations=1)
-    i1 = cv2.bitwise_and(image, image, mask=mask)
-
-    
-    # 髪の毛なし
-    if is_bold(topmost,mask):
-        cv2.rectangle(image,topmost,topmost,(0,0,255),5)
-        print(topmost)
-
-
-
-    # 髪の毛あり
-    else:
-        #輪郭取得
-        cnts = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
-
-        cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
-
-	#輪郭を赤線で囲む
-        cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
-    
-       
-        
-  	#取得した輪郭の中を塗りつぶす
-        cv2.fillPoly(image, pts =[cnts[0]], color= (255,0,0))
-        
-        for c in cnts[0]:
-            print(c)
-
-
-    if bool:
-        # 認識結果の保存
-        cv2.imwrite(output_path, image)
-        #cv2.imwrite(output_path2, image)
-        return True
-    else:
-        return False
-    
+    #-----------------------------------------------------------------------------------
+    #image = imutils.resize(image, height=500)     # We result in 500px in height
+    #mask = get_head_mask(image)      # We get the mask of the head (without BG)
+    #
+    #gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+    #ret,thresh = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
+    #contours,hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    #contimg=cv2.drawContours(image,contours,-1,(0,255,0),3)
+    #cv2.imwrite(output_path, contimg)
+    #return True
+    ## Find the contours, take the largest one and memorize its upper point as the top of the head
+    ##cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
+    ##print("cnts{}".format(cnts))
+    ##cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+    ##print("cnts{}".format(cnts))
+    ##cnt=cnts[0]
+    ##topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
+    ##print("topmost{}".format(topmost))
+#
+#
+    ## We remove the face by the color of the skin
+    #lower = np.array([0, 0, 100], dtype="uint8")  # Lower limit of skin color
+    #upper = np.array([255, 255, 255], dtype="uint8")  # Upper skin color limit
+    #converted = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)   # We translate into HSV color format
+    #skinMask = cv2.inRange(converted, lower, upper)     # Write a mask from places where the color is between the outside
+    #mask[skinMask == 255] = 0   # We remove the face mask from the mask of the head
+#
+#
+    #kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    #mask = cv2.dilate(mask, kernel1, iterations=1)
+    #i1 = cv2.bitwise_and(image, image, mask=mask)
+#
+    #
+    ## 髪の毛なし
+    #if is_bold(topmost,mask):
+    #    cv2.rectangle(image,topmost,topmost,(0,0,255),5)
+    #    print(topmost)
+#
+#
+#
+    ## 髪の毛あり
+    #else:
+    #    #輪郭取得
+    #    cnts = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
+#
+    #    cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+#
+	##輪郭を赤線で囲む
+    #    cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
+    #
+    #   
+    #    
+  	##取得した輪郭の中を塗りつぶす
+    #    cv2.fillPoly(image, pts =[cnts[0]], color= (255,0,0))
+    #    
+    #    for c in cnts[0]:
+    #        print(c)
+#
+#
+    #if bool:
+    #    # 認識結果の保存
+    #    cv2.imwrite(output_path, image)
+    #    #cv2.imwrite(output_path2, image)
+    #    return True
+    #else:
+    #    return False
+    #
 
 
 if __name__ == "__main__":
