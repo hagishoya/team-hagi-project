@@ -361,15 +361,15 @@ def change_image2(event):
 
     img1 = image_resize(image1, width = 500)
 
-    cv2.imshow("Resized", img1)
-    cv2.waitKey(0)
+    #cv2.imshow("Resized", img1)
+    #cv2.waitKey(0)
 
     #Detecting Edge of image
     #画像のエッジを検出する
     canny = cv2.Canny(img1, 100, 150)
 
-    cv2.imshow("Edge", canny)
-    cv2.waitKey(0)
+    #cv2.imshow("Edge", canny)
+    #cv2.waitKey(0)
 
     coords = np.nonzero(canny)
 
@@ -379,8 +379,8 @@ def change_image2(event):
 
     img2 = cv2.medianBlur(img1, 5)
 
-    cv2.imshow("Blurred", img2)
-    cv2.waitKey(0)
+    #cv2.imshow("Blurred", img2)
+    #cv2.waitKey(0)
 
     #K-mean approach
     #K-meanアプローチ
