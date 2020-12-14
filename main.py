@@ -354,15 +354,17 @@ def change_image2(event):
     image = cv2.imread(image_path)     # Load image
     image = imutils.resize(image, height=500)     # We result in 500px in height
     mask = get_head_mask(image)      # We get the mask of the head (without BG)
-    cv2.imwrite(output_path, mask)
-    return True
+    
 
     # Find the contours, take the largest one and memorize its upper point as the top of the head
     cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
+    print("cnts{}".format(cnts))
     cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+    print("cnts{}".format(cnts))
     cnt=cnts[0]
+    print("cnts{}".format(cnts))
     topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
-
+    print("topmost{}".format(topmost))
 
     # We remove the face by the color of the skin
     lower = np.array([0, 0, 100], dtype="uint8")  # Lower limit of skin color
