@@ -9,7 +9,7 @@ import imutils
 import numpy as np
 import colorsys
 import scipy.ndimage as snd
-from PIL import Image, ImageDaw
+from PIL import Image, ImageDraw
 
 work = {}
 path_w1 = 'saveid.txt'
