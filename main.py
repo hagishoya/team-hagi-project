@@ -8,7 +8,7 @@ import cv2
 import imutils
 import numpy as np
 import colorsys
-import scipy.ndimage as snd
+#import scipy.ndimage as snd
 
 work = {}
 path_w1 = 'saveid.txt'
