@@ -419,6 +419,20 @@ def change_image2(event):
     #np.set_printoptions(threshold=np.inf)
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
+    #----------------------------------------------------------------------------------
+    im = Image.new('RGB', (500, 250), (128, 128, 128))
+    draw = ImageDraw.Draw(im)
+    draw.polygon(xyhair, fill=None, outline=None)
+    im.save(output1, quality=95)
+    return True
+
+
+
+
+
+
+
+    #------------------------------------------------------------------------------------
     # plot an image with only the hair's cluster on a white background
     #白い背景に髪の毛のクラスターのみを含む画像をプロットします
     #cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
