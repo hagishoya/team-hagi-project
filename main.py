@@ -410,7 +410,8 @@ def change_image2(event):
         # get the hair's cluster's xy coordinates
         #ヘアのクラスターのxy座標を取得します
     xyhair = hairmask.nonzero()
-    print("xyhair:{}".format(xyhair))
+    print("xhair:{}".format(xyhair[0]))
+    print("yhair:{}".format(xyhair[1]))
     # plot an image with only the hair's cluster on a white background
     #白い背景に髪の毛のクラスターのみを含む画像をプロットします
     #cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
