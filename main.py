@@ -365,7 +365,11 @@ def change_image2(event):
     #cv2.waitKey(0)
 
     #Detecting Edge of image
-    #画像のエッジを検出する
+    #画像のエッジを検出する第1引数は入力画像を指定します．
+    # 第2,3引数はヒステリシスを使ったしきい値処理に使う 
+    # minVal と maxVal をそれぞれ指定します．
+    # 第4引数は画像の勾配を計算するためのSobelフィルタのサイズ 
+    # aperture_size で，デフォルト値は3です．
     canny = cv2.Canny(img1, 100, 150)
 
     #cv2.imshow("Edge", canny)
@@ -374,6 +378,7 @@ def change_image2(event):
     coords = np.nonzero(canny)
 
     topmost_y = np.min(coords[0])
+    print("topmost_y:{}".format(topmost_y))
     #Blurring effect
     #ぼかし効果
 
@@ -410,6 +415,7 @@ def change_image2(event):
         # get the hair's cluster's xy coordinates
         #ヘアのクラスターのxy座標を取得します
     xyhair = hairmask.nonzero()
+    numpy.set_printoptions(threshold=numpy.inf)
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
     # plot an image with only the hair's cluster on a white background
