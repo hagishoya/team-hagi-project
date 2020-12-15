@@ -8,7 +8,7 @@ import cv2
 import imutils
 import numpy as np
 import colorsys
-
+import scipy.ndimage as snd
 
 work = {}
 path_w1 = 'saveid.txt'
@@ -413,8 +413,21 @@ def change_image2(event):
     print("xyhair:{}".format(xyhair))
     # plot an image with only the hair's cluster on a white background
     #白い背景に髪の毛のクラスターのみを含む画像をプロットします
-    cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
+    #cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
     #cv2.imwrite(output_path, output1)
+    #接続されているすべてのブロブにヘアマスクでラベルを付ける
+    bloblab = snd.label(hairmask, structure=np.ones((3,3)))[0]
+
+    # 髪だけのマスクを作成する
+    haironlymask = bloblab == bloblab[topmost_y + 20, 250]
+
+    # 髪の毛だけで画像を取得し、それをトリミングします
+    justhair = np.where(haironlymask[..., None], img1, [255,255,255])
+    nz = haironlymask.nonzero()
+    justhair = justhair[nz[0].min():nz[0].max(), nz[1].min():nz[1].max()]
+
+    # 白い背景に髪の毛だけの画像を保存します
+    cv2.imwrite(output_path, justhair)
     return True
     #-----------------------------------------------------------------------------------
     #image = imutils.resize(image, height=500)     # We result in 500px in height
