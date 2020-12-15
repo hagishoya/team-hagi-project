@@ -416,7 +416,7 @@ def change_image2(event):
         #ヘアのクラスターのxy座標を取得します
     xyhair = hairmask.nonzero()
     #print全表示
-    np.set_printoptions(threshold=np.inf)
+    #np.set_printoptions(threshold=np.inf)
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
     # plot an image with only the hair's cluster on a white background
