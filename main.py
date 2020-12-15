@@ -400,15 +400,17 @@ def change_image2(event):
     #髪の毛のクラスターのインデックスを見つける
     mask = label1.reshape(output1.shape[:-1])
     khair = mask[(topmost_y + 20, 250)]
+    print("khair:{}".format(khair))
 
     # get a mask that's True at all of the indices of hair's group
     #髪の毛のグループのすべてのインデックスでTrueであるマスクを取得します
     hairmask = mask==khair
+    print("hairmask:{}".format(hairmask))
 
         # get the hair's cluster's xy coordinates
         #ヘアのクラスターのxy座標を取得します
     xyhair = hairmask.nonzero()
-
+    print("xyhair:{}".format(xyhair))
     # plot an image with only the hair's cluster on a white background
     #白い背景に髪の毛のクラスターのみを含む画像をプロットします
     cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
@@ -486,34 +488,35 @@ def change_image2(event):
 
 def image_resize(image1, width = None, height = None, inter = 
 cv2.INTER_AREA):
-    # initialize the dimensions of the image to be resized and
-    # grab the image size
+
+    #サイズ変更する画像のサイズを初期化し、
+    #画像サイズを取得します
     dim = None
     (h, w) = image1.shape[:2]
 
-    # if both the width and height are None, then return the
-    # original image
+    # 幅と高さの両方がNoneの場合、
+    #元の画像
     if width is None and height is None:
         return image1
 
-    # check to see if the width is None
+    # 幅がなしかどうかを確認します
     if width is None:
-        # calculate the ratio of the height and construct the
-        # dimensions
+        # 高さの比率を計算し、
+        # 寸法
         r = height / float(h)
         dim = (int(w * r), height)
 
-    # otherwise, the height is None
+    # それ以外の場合、高さはなし
     else:
-        # calculate the ratio of the width and construct the
-        # dimensions
+        # 幅の比率を計算し、
+        # 寸法
         r = width / float(w)
         dim = (width, int(h * r))
 
-    # resize the image
+    # 画像のサイズを変更する
     resized = cv2.resize(image1, dim, interpolation = inter)
 
-    # return the resized image
+    # サイズ変更された画像を返す
     return resized
 
 
