@@ -415,7 +415,8 @@ def change_image2(event):
         # get the hair's cluster's xy coordinates
         #ヘアのクラスターのxy座標を取得します
     xyhair = hairmask.nonzero()
-    numpy.set_printoptions(threshold=numpy.inf)
+    #print全表示
+    np.set_printoptions(threshold=numpy.inf)
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
     # plot an image with only the hair's cluster on a white background
