@@ -423,7 +423,7 @@ def change_image2(event):
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
     for i in xyhair: 
-        print(xhair[i])
+        print(xyhair[i][i])
     #----------------------------------------------------------------------------------
     im = Image.new('RGB', (500, 250), (128, 128, 128))
     draw = ImageDraw.Draw(im)
