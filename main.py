@@ -451,6 +451,7 @@ def change_image2(event):
     # 髪だけのマスクを作成する
     haironlymask = bloblab == bloblab[topmost_y + 20, 250]
 
+
     # 髪の毛だけで画像を取得し、それをトリミングします
     justhair = np.where(haironlymask[..., None], img1, [255,255,255])
     nz = haironlymask.nonzero()
