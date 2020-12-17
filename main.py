@@ -425,7 +425,7 @@ def change_image2(event):
     print("yhair:{}".format(xyhair[1]))
     
     xyhair = list(zip(xyhair[0],xyhair[1]))
-
+    print("type{}".format(type(xyhair)))
     print("forxyhair:{}".format(xyhair[0]))
     #----------------------------------------------------------------------------------
     im = Image.open(image_path)
