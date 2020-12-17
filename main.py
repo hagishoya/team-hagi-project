@@ -426,7 +426,7 @@ def change_image2(event):
     
     xyhair = list(zip(xyhair[0],xyhair[1]))
 
-    print("forxyhair:{}".format(xyhair[0][0]))
+    print("forxyhair:{}".format(xyhair[0]))
     #----------------------------------------------------------------------------------
     im = Image.open(image_path)
     draw = ImageDraw.Draw(im)
