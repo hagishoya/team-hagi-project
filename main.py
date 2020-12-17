@@ -438,7 +438,7 @@ def change_image2(event):
 
 
 
-
+    #getピクセル
 
     #------------------------------------------------------------------------------------
     # plot an image with only the hair's cluster on a white background
