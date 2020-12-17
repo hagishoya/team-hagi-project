@@ -419,14 +419,14 @@ def change_image2(event):
     print(type(xyhair))
     #print全表示
     #np.set_printoptions(threshold=np.inf)
-    np.set_printoptions(threshold=0)
+
     print("xyhair:{}".format(xyhair))
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
     
     xyhair = list(zip(xyhair[0],xyhair[1]))
-    np.set_printoptions(threshold=0)
-    print("forxyhair:{}".format(xyhair))
+
+    print("forxyhair:{}".format(xyhair[0][0]))
     #----------------------------------------------------------------------------------
     im = Image.open(image_path)
     draw = ImageDraw.Draw(im)
