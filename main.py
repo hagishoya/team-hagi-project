@@ -427,7 +427,7 @@ def change_image2(event):
 
     print("forxyhair:{}".format(xyhair))
     #----------------------------------------------------------------------------------
-    im = Image.new('RGB', (500, 250), (128, 128, 128))
+    im = Image.open(image_path)
     draw = ImageDraw.Draw(im)
     draw.polygon(xyhair, fill=None, outline=None)
     im.save(output1, quality=95)
