@@ -395,7 +395,7 @@ def change_image2(event):
 
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
 
-    K=30
+    K=255
     ret, label1, center1 = cv2.kmeans(Z, K, None,criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
     center1 = np.uint8(center1)
     res1 = center1[label1.flatten()]
@@ -420,19 +420,19 @@ def change_image2(event):
     #print全表示
     #np.set_printoptions(threshold=np.inf)
 
-    print("xyhair:{}".format(xyhair))
-    print("xhair:{}".format(xyhair[0]))
-    print("yhair:{}".format(xyhair[1]))
-    
-    xyhair = tuple(zip(xyhair[0],xyhair[1]))
-    print("type{}".format(type(xyhair)))
-    print("forxyhair:{}".format(xyhair[0]))
-    #----------------------------------------------------------------------------------
-    im = Image.open(image_path)
-    draw = ImageDraw.Draw(im)
-    draw.polygon(xyhair, fill=None, outline=None)
-    im.save(output_path, quality=95)
-    return True
+   # print("xyhair:{}".format(xyhair))
+   # print("xhair:{}".format(xyhair[0]))
+   # print("yhair:{}".format(xyhair[1]))
+   # 
+   # xyhair = tuple(zip(xyhair[0],xyhair[1]))
+   # print("type{}".format(type(xyhair)))
+   # print("forxyhair:{}".format(xyhair[0]))
+   # #----------------------------------------------------------------------------------
+   # im = Image.open(image_path)
+   # draw = ImageDraw.Draw(im)
+   # draw.polygon(xyhair, fill=None, outline=None)
+   # im.save(output_path, quality=95)
+   # return True
 
 
 
@@ -443,23 +443,24 @@ def change_image2(event):
     #------------------------------------------------------------------------------------
     # plot an image with only the hair's cluster on a white background
     #白い背景に髪の毛のクラスターのみを含む画像をプロットします
-    #cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
-    #cv2.imwrite(output_path, output1)
+    cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
+    cv2.imwrite(output_path, output1)
+    return True
     #接続されているすべてのブロブにヘアマスクでラベルを付ける
-    bloblab = snd.label(hairmask, structure=np.ones((3,3)))[0]
+    #bloblab = snd.label(hairmask, structure=np.ones((3,3)))[0]
 
     # 髪だけのマスクを作成する
-    haironlymask = bloblab == bloblab[topmost_y + 20, 250]
+    #haironlymask = bloblab == bloblab[topmost_y + 20, 250]
 
 
     # 髪の毛だけで画像を取得し、それをトリミングします
-    justhair = np.where(haironlymask[..., None], img1, [255,255,255])
-    nz = haironlymask.nonzero()
-    justhair = justhair[nz[0].min():nz[0].max(), nz[1].min():nz[1].max()]
+    #justhair = np.where(haironlymask[..., None], img1, [255,255,255])
+    #nz = haironlymask.nonzero()
+    #justhair = justhair[nz[0].min():nz[0].max(), nz[1].min():nz[1].max()]
 
     # 白い背景に髪の毛だけの画像を保存します
-    cv2.imwrite(output_path, justhair)
-    return True
+    #cv2.imwrite(output_path, justhair)
+    #return True
     #-----------------------------------------------------------------------------------
     #image = imutils.resize(image, height=500)     # We result in 500px in height
     #mask = get_head_mask(image)      # We get the mask of the head (without BG)
