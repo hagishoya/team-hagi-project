@@ -430,7 +430,7 @@ def change_image2(event):
     im = Image.open(image_path)
     draw = ImageDraw.Draw(im)
     draw.polygon(xyhair, fill=None, outline=None)
-    im.save(output1, quality=95)
+    im.save(output_path, quality=95)
     return True
 
 
