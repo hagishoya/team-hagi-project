@@ -419,7 +419,7 @@ def change_image2(event):
     print(type(xyhair))
     #print全表示
     #np.set_printoptions(threshold=np.inf)
-    np.set_printoptions(threshold=9)
+    np.set_printoptions(threshold=99)
     print("xyhair:{}".format(xyhair))
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
