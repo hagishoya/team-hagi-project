@@ -423,8 +423,8 @@ def change_image2(event):
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
     
-    for i in xyhair: 
-        xyhair = xyhair[0][i],xyhair[1][i]
+    xyhair = list(zip(xyhair[0],xyhair[1]))
+
     print("forxyhair:{}".format(xyhair))
     #----------------------------------------------------------------------------------
     im = Image.new('RGB', (500, 250), (128, 128, 128))
