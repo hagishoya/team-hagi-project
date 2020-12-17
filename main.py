@@ -424,13 +424,13 @@ def change_image2(event):
     print("xhair:{}".format(xyhair[0]))
     print("yhair:{}".format(xyhair[1]))
     
-    xyhair = list(zip(xyhair[0],xyhair[1]))
+    xyhair = tuple(zip(xyhair[0],xyhair[1]))
     print("type{}".format(type(xyhair)))
     print("forxyhair:{}".format(xyhair[0]))
     #----------------------------------------------------------------------------------
     im = Image.open(image_path)
     draw = ImageDraw.Draw(im)
-    draw.polygon(xyhair, fill=None, outline=None)
+    draw.line(xyhair, fill=None, outline=None)
     im.save(output_path, quality=95)
     return True
 
