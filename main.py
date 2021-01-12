@@ -445,7 +445,7 @@ def change_image2(event):
     #------------------------------------------------------------------------------------
     # plot an image with only the hair's cluster on a white background
     #白い背景に髪の毛のクラスターのみを含む画像をプロットします
-    cv2.imwrite(output_path, np.where(hairmask[..., None], img2, [255,255,255]))
+    cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
     #cv2.imwrite(output_path, output1)
     return True
     #接続されているすべてのブロブにヘアマスクでラベルを付ける
