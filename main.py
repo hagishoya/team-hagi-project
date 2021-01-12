@@ -395,7 +395,7 @@ def change_image2(event):
 
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
 
-    K=12
+    K=4
     ret, label1, center1 = cv2.kmeans(Z, K, None,criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
     center1 = np.uint8(center1)
     res1 = center1[label1.flatten()]
@@ -407,7 +407,7 @@ def change_image2(event):
     # find the index of the cluster of the hair
     #髪の毛のクラスターのインデックスを見つける
     mask = label1.reshape(output1.shape[:-1])
-    khair = mask[(topmost_y + 20, 250)]
+    khair = mask[(topmost_y + 20)]
     print("khair:{}".format(khair))
 
     # get a mask that's True at all of the indices of hair's group
