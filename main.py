@@ -398,7 +398,7 @@ def change_image2(event):
 
     # save
     cv2.imwrite(output_path, img)
-    
+    return True
 
 
     img = cv2.imread(output_path)     # Load image
