@@ -382,6 +382,7 @@ def change_image2(event):
     # detect tulips
     img_H, img_S, img_V = cv2.split(img_HSV)
     thre, img_flowers = cv2.threshold(img_H, 140, 255, cv2.THRESH_BINARY)
+    print("v2.threshold")
     # find tulips
     labels, contours, hierarchy = cv2.findContours(img_flowers, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
