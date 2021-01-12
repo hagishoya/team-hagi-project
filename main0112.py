@@ -356,17 +356,172 @@ def change_image2(event):
     #output_path2 = "static/" + save_file2
     print("アウトプットパス: {}".format(output_path))
 
-    img = cv2.imread(image_path)     # Load image
-    height = img.shape[0]
-    width = img.shape[1]
-    img2 = cv2.resize(img , (int(width*0.5), int(height*0.5)))
-    hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
-    hsv_2 = np.copy(hsv)
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (hsv[:, :, 0]<25) ,hsv[:, :,(2)]*0.2,hsv[:, :, 0])
-    bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
-    cv2.imshow(output_path,bgr)
-    return True
+    image1 = cv2.imread(image_path)     # Load image
+    #Resizing Image for fixed width
+    #固定幅の画像のサイズ変更
 
+    img1 = image_resize(image1, width = 500)
+
+    #cv2.imshow("Resized", img1)
+    #cv2.waitKey(0)
+
+    #Detecting Edge of image
+    #画像のエッジを検出する第1引数は入力画像を指定します．
+    # 第2,3引数はヒステリシスを使ったしきい値処理に使う 
+    # minVal と maxVal をそれぞれ指定します．
+    # 第4引数は画像の勾配を計算するためのSobelフィルタのサイズ 
+    # aperture_size で，デフォルト値は3です．
+    canny = cv2.Canny(img1, 100, 150)
+
+    #cv2.imshow("Edge", canny)
+    #cv2.waitKey(0)
+
+    coords = np.nonzero(canny)
+
+    topmost_y = np.min(coords[0])
+    print("topmost_y:{}".format(topmost_y))
+    #Blurring effect
+    #ぼかし効果
+
+    img2 = cv2.medianBlur(img1, 5)
+
+    #cv2.imshow("Blurred", img2)
+    #cv2.waitKey(0)
+
+    #K-mean approach
+    #K-meanアプローチ
+    Z = img2.reshape((-1,3))
+    Z = np.float32(Z)
+
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+
+    K=4
+    ret, label1, center1 = cv2.kmeans(Z, K, None,criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+    center1 = np.uint8(center1)
+    res1 = center1[label1.flatten()]
+    output1 = res1.reshape((img2.shape))
+
+    cv2.circle(output1, (250, topmost_y + 20), 5, (0,0,255), -1)
+    #cv2.imwrite(output_path,output1)
+    #return True
+    # find the index of the cluster of the hair
+    #髪の毛のクラスターのインデックスを見つける
+    mask = label1.reshape(output1.shape[:-1])
+    khair = mask[(topmost_y + 20)]
+    print("khair:{}".format(khair))
+
+    # get a mask that's True at all of the indices of hair's group
+    #髪の毛のグループのすべてのインデックスでTrueであるマスクを取得します
+    hairmask = mask==khair
+    #print("hairmask:{}".format(hairmask))
+
+        # get the hair's cluster's xy coordinates
+        #ヘアのクラスターのxy座標を取得します
+    xyhair = hairmask.nonzero()
+    #print(type(xyhair))
+    #print全表示
+    #np.set_printoptions(threshold=np.inf)
+
+    # print("xyhair:{}".format(xyhair))
+    # print("xhair:{}".format(xyhair[0]))
+    # # print("yhair:{}".format(xyhair[1]))
+   # 
+   # xyhair = tuple(zip(xyhair[0],xyhair[1]))
+   # print("type{}".format(type(xyhair)))
+   # print("forxyhair:{}".format(xyhair[0]))
+   # #----------------------------------------------------------------------------------
+   # im = Image.open(image_path)
+   # draw = ImageDraw.Draw(im)
+   # draw.polygon(xyhair, fill=None, outline=None)
+   # im.save(output_path, quality=95)
+   # return True
+
+
+
+
+
+    #getピクセル
+
+    #------------------------------------------------------------------------------------
+    # plot an image with only the hair's cluster on a white background
+    #白い背景に髪の毛のクラスターのみを含む画像をプロットします
+    cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
+    #cv2.imwrite(output_path, output1)
+    return True
+    #接続されているすべてのブロブにヘアマスクでラベルを付ける
+    #bloblab = snd.label(hairmask, structure=np.ones((3,3)))[0]
+
+    # 髪だけのマスクを作成する
+    #haironlymask = bloblab == bloblab[topmost_y + 20, 250]
+
+
+    # 髪の毛だけで画像を取得し、それをトリミングします
+    #justhair = np.where(haironlymask[..., None], img1, [255,255,255])
+    #nz = haironlymask.nonzero()
+    #justhair = justhair[nz[0].min():nz[0].max(), nz[1].min():nz[1].max()]
+
+    # 白い背景に髪の毛だけの画像を保存します
+    #cv2.imwrite(output_path, justhair)
+    #return True
+    #-----------------------------------------------------------------------------------
+    #image = imutils.resize(image, height=500)     # We result in 500px in height
+    #mask = get_head_mask(image)      # We get the mask of the head (without BG)
+    #
+    #gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+    #ret,thresh = cv2.threshold(gray,127,255,cv2.THRESH_BINARY)
+    #contours,hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    #contimg=cv2.drawContours(image,contours,-1,(0,255,0),3)
+    #cv2.imwrite(output_path, contimg)
+    #return True
+    ## Find the contours, take the largest one and memorize its upper point as the top of the head
+    ##cnts = cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)[0]
+    ##print("cnts{}".format(cnts))
+    ##cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+    ##print("cnts{}".format(cnts))
+    ##cnt=cnts[0]
+    ##topmost = tuple(cnt[cnt[:,:,1].argmin()][0])
+    ##print("topmost{}".format(topmost))
+#
+#
+    ## We remove the face by the color of the skin
+    #lower = np.array([0, 0, 100], dtype="uint8")  # Lower limit of skin color
+    #upper = np.array([255, 255, 255], dtype="uint8")  # Upper skin color limit
+    #converted = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)   # We translate into HSV color format
+    #skinMask = cv2.inRange(converted, lower, upper)     # Write a mask from places where the color is between the outside
+    #mask[skinMask == 255] = 0   # We remove the face mask from the mask of the head
+#
+#
+    #kernel1 = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+    #mask = cv2.dilate(mask, kernel1, iterations=1)
+    #i1 = cv2.bitwise_and(image, image, mask=mask)
+#
+    #
+    ## 髪の毛なし
+    #if is_bold(topmost,mask):
+    #    cv2.rectangle(image,topmost,topmost,(0,0,255),5)
+    #    print(topmost)
+#
+#
+#
+    ## 髪の毛あり
+    #else:
+    #    #輪郭取得
+    #    cnts = cv2.findContours(mask.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[0]
+#
+    #    cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+#
+	##輪郭を赤線で囲む
+    #    cv2.drawContours(image,[cnts[0]],-1,(0,0,255),2)
+    #
+    #   
+    #    
+  	##取得した輪郭の中を塗りつぶす
+    #    cv2.fillPoly(image, pts =[cnts[0]], color= (255,0,0))
+    #    
+    #    for c in cnts[0]:
+    #        print(c)
+#
+#
     #if bool:
     #    # 認識結果の保存
     #    cv2.imwrite(output_path, image)
