@@ -342,24 +342,24 @@ def hsv2rgb(h,s,v):
     return (round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 
-def draw_contours_B(output_path, img):
+#def draw_contours_B(output_path, img):
     # 2値化
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     #cv2.imwrite(now + '_1_' + file_name + '_gray_B.jpg', gray)
     
-    ret,th1 = cv2.threshold(gray,200,255,cv2.THRESH_BINARY)
+#    ret,th1 = cv2.threshold(gray,200,255,cv2.THRESH_BINARY)
     #cv2.imwrite(now + '_2_' + file_name + '_th1_B.jpg', gray)
     # 輪郭抽出
-    contours, hierarchy = cv2.findContours(th1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    areas = []
-    for cnt in contours:
-        area = cv2.contourArea(cnt)
-        if area > 10000:
-            epsilon = 0.1*cv2.arcLength(cnt,True)
-            approx = cv2.approxPolyDP(cnt,epsilon,True)
-            areas.append(approx)
+#    contours, hierarchy = cv2.findContours(th1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+#    areas = []
+#    for cnt in contours:
+#        area = cv2.contourArea(cnt)
+#        if area > 10000:
+#            epsilon = 0.1*cv2.arcLength(cnt,True)
+#            approx = cv2.approxPolyDP(cnt,epsilon,True)
+#            areas.append(approx)
     #cv2.drawContours(img, areas, -1, (0,255,0), 3)
-    cv2.imwrite(output_path, img)
+#    cv2.imwrite(output_path, img)
 
 
 def change_image2(event):
@@ -373,7 +373,32 @@ def change_image2(event):
     #output_path2 = "static/" + save_file2
     print("アウトプットパス: {}".format(output_path))
     img = cv2.imread(image_path)
-    draw_contours_B(output_path, img)
+    #draw_contours_B(output_path, img)
+
+    # load image, change color spaces, and smoothing
+    img_HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    img_HSV = cv2.GaussianBlur(img_HSV, (9, 9), 3)
+
+    # detect tulips
+    img_H, img_S, img_V = cv2.split(img_HSV)
+    _thre, img_flowers = cv2.threshold(img_H, 140, 255, cv2.THRESH_BINARY)
+    cv2.imwrite('tulips_mask.jpg', img_flowers)
+    # find tulips
+    labels, contours, hierarchy = cv2.findContours(img_flowers, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+
+    for i in range(0, len(contours)):
+        if len(contours[i]) > 0:
+
+            # remove small objects
+            if cv2.contourArea(contours[i]) < 500:
+                continue
+
+            cv2.polylines(img, contours[i], True, (255, 255, 255), 5)
+
+    # save
+    cv2.imwrite(output_path, img)
+    return True
+
 
     img = cv2.imread(output_path)     # Load image
     height = img.shape[0]
