@@ -411,18 +411,18 @@ def change_image2(event):
     # get a mask that's True at all of the indices of hair's group
     #髪の毛のグループのすべてのインデックスでTrueであるマスクを取得します
     hairmask = mask==khair
-    print("hairmask:{}".format(hairmask))
+    #print("hairmask:{}".format(hairmask))
 
         # get the hair's cluster's xy coordinates
         #ヘアのクラスターのxy座標を取得します
     xyhair = hairmask.nonzero()
-    print(type(xyhair))
+    #print(type(xyhair))
     #print全表示
     #np.set_printoptions(threshold=np.inf)
 
-   # print("xyhair:{}".format(xyhair))
-   # print("xhair:{}".format(xyhair[0]))
-   # print("yhair:{}".format(xyhair[1]))
+    # print("xyhair:{}".format(xyhair))
+    # print("xhair:{}".format(xyhair[0]))
+    # # print("yhair:{}".format(xyhair[1]))
    # 
    # xyhair = tuple(zip(xyhair[0],xyhair[1]))
    # print("type{}".format(type(xyhair)))
