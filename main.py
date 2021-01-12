@@ -364,7 +364,7 @@ def change_image2(event):
     hsv_2 = np.copy(hsv)
     hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>16) & (hsv[:, :, 0]<25) ,hsv[:, :,(2)]*0.2,hsv[:, :, 0])
     bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
-    cv2.imshow(output_path,bgr)
+    cv2.imwrite(output_path,bgr)
     return True
 
     #if bool:
