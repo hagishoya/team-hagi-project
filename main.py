@@ -395,7 +395,7 @@ def change_image2(event):
 
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
 
-    K=255
+    K=4
     ret, label1, center1 = cv2.kmeans(Z, K, None,criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
     center1 = np.uint8(center1)
     res1 = center1[label1.flatten()]
@@ -445,8 +445,8 @@ def change_image2(event):
     #------------------------------------------------------------------------------------
     # plot an image with only the hair's cluster on a white background
     #白い背景に髪の毛のクラスターのみを含む画像をプロットします
-    cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
-    #cv2.imwrite(output_path, output1)
+    #cv2.imwrite(output_path, np.where(hairmask[..., None], img1, [255,255,255]))
+    cv2.imwrite(output_path, output1)
     return True
     #接続されているすべてのブロブにヘアマスクでラベルを付ける
     #bloblab = snd.label(hairmask, structure=np.ones((3,3)))[0]
