@@ -395,7 +395,7 @@ def change_image2(event):
 
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
 
-    K=4
+    K=12
     ret, label1, center1 = cv2.kmeans(Z, K, None,criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
     center1 = np.uint8(center1)
     res1 = center1[label1.flatten()]
