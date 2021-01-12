@@ -165,8 +165,8 @@ def handle_send_message2(event,relpy):
     if result:
         line_bot_api.reply_message(
             reply, ImageSendMessage(
-                original_content_url=FQDN + "/static/" + event + "_face.jpg",
-                preview_image_url=FQDN + "/static/" + event + "_face.jpg",
+                original_content_url=FQDN + "static/" + event + "_face.jpg",
+                preview_image_url=FQDN + "static/" + event + "_face.jpg",
             )
         )
 
@@ -377,9 +377,11 @@ def change_image2(event):
 
     # load image, change color spaces, and smoothing
     img_HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    #ガウシアンフィルタ
     img_HSV = cv2.GaussianBlur(img_HSV, (9, 9), 3)
 
     # detect tulips
+    #カラー画像をＲＧＢに分離
     img_H, img_S, img_V = cv2.split(img_HSV)
     thre, img_flowers = cv2.threshold(img_H, 140, 255, cv2.THRESH_BINARY)
     # find tulips
@@ -396,7 +398,7 @@ def change_image2(event):
 
     # save
     cv2.imwrite(output_path, img)
-    return True
+    
 
 
     img = cv2.imread(output_path)     # Load image
