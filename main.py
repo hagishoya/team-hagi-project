@@ -423,13 +423,13 @@ def change_image2(event):
     #return True
 
 
-    img = cv2.imread(image_path)     # Load image
+    #img = cv2.imread(output_path)     # Load image
     height = img.shape[0]
     width = img.shape[1]
     img2 = cv2.resize(img , (int(width*0.5), int(height*0.5)))
     hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>90) & (hsv[:, :, 0]<150))
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>90) & (hsv[:, :, 0]<150))#,hsv[:, :,(2)]*0.2,hsv[:, :, 0]
     bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
     cv2.imwrite(output_path,bgr)
     return True
