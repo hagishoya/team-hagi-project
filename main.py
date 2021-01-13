@@ -375,29 +375,49 @@ def change_image2(event):
     img = cv2.imread(image_path)
     #draw_contours_B(output_path, img)
 
-    # load image, change color spaces, and smoothing
-    img_HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+#-----------------------------------------------------------------------------
+#チューリップ
+#-----------------------------------------------------------------------------
+# load image, change color spaces, and smoothing
+
+#    img_HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     #ガウシアンフィルタ
-    img_HSV = cv2.GaussianBlur(img_HSV, (9, 9), 3)
+#    img_HSV = cv2.GaussianBlur(img_HSV, (9, 9), 3)
 
     # detect tulips
     #カラー画像をＲＧＢに分離
-    img_H, img_S, img_V = cv2.split(img_HSV)
-    thre, img_flowers = cv2.threshold(img_H, 140, 255, cv2.THRESH_BINARY)
+#    img_H, img_S, img_V = cv2.split(img_HSV)
+#    thre, img_flowers = cv2.threshold(img_H, 140, 255, cv2.THRESH_BINARY)
     # find tulips
-    contours, hierarchy = cv2.findContours(img_flowers, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+#    contours, hierarchy = cv2.findContours(img_flowers, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
-    for i in range(0, len(contours)):
-        if len(contours[i]) > 0:
+#    for i in range(0, len(contours)):
+#        if len(contours[i]) > 0:
 
             # remove small objects
-            if cv2.contourArea(contours[i]) < 500:
-                continue
+#            if cv2.contourArea(contours[i]) < 500:
+#                continue
 
-            cv2.polylines(img, contours[i], True, (255, 255, 255), 5)
+#            cv2.polylines(img, contours[i], True, (255, 255, 255), 5)
 
     # save
-    cv2.imwrite(output_path, img)
+#    cv2.imwrite(output_path, img)
+#    return True
+
+#----------------------------------------------------------------------------------
+    # Convert BGR to HSV
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+    # define range of blue color in HSV
+    lower_blue = np.array([110,50,50])
+    upper_blue = np.array([130,255,255])
+
+    # Threshold the HSV image to get only blue colors
+    mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+    # Bitwise-AND mask and original image
+    res = cv2.bitwise_and(frame,frame, mask= mask)
+    cv2.imwrite(output_path,res)
     return True
 
 
@@ -423,8 +443,7 @@ def change_image2(event):
 
 
 
-def image_resize(image1, width = None, height = None, inter = 
-cv2.INTER_AREA):
+def image_resize(image1, width = None, height = None, inter = cv2.INTER_AREA):
 
     #サイズ変更する画像のサイズを初期化し、
     #画像サイズを取得します
