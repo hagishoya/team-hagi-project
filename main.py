@@ -423,7 +423,7 @@ def change_image2(event):
     #return True
 
 
-    img = cv2.imread(output_path)     # Load image
+    img = cv2.imread(image_path)     # Load image
     height = img.shape[0]
     width = img.shape[1]
     img2 = cv2.resize(img , (int(width*0.5), int(height*0.5)))
