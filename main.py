@@ -439,6 +439,7 @@ def change_image2(event):
     cv2.imwrite(output_path,bgr)
     return True
 
+
     #if bool:
     #    # 認識結果の保存
     #    cv2.imwrite(output_path, image)
