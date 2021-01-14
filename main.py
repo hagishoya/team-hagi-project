@@ -430,7 +430,7 @@ def change_image2(event):
     hsv = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
     hsv_2[:, :, 2] = hsv_2[:,:,(2)]*1.0
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] * 0.5,hsv[:, :, 2] * 0.5)
+    hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] * 0.5,hsv[:, :, 2] * 0.5)
     bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
     cv2.imwrite(output_path,bgr)
     return True
