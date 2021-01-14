@@ -432,7 +432,7 @@ def change_image2(event):
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 150,hsv[:, :, 0])
     #hsv_2[:, :, 2] = np.where((hsv[:, :, 2]>5) )
     #hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.5,hsv[:, :, 2])#金髪から黒髪
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<40) ,hsv[:, :, 0] -90,hsv[:, :, 0])#黒から青
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +120 ,hsv[:, :, 0])#黒から青
     bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
     cv2.imwrite(output_path,bgr)
     return True
