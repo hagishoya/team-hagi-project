@@ -433,8 +433,8 @@ def change_image2(event):
     #hsv_2[:, :, 2] = np.where((hsv[:, :, 2]>5) )
     #hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.5,hsv[:, :, 2])#金髪から黒髪
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +110 ,hsv[:, :, 0])#黒(茶色)から青
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])#黒(茶色)から緑
-    #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +160 ,hsv[:, :, 0])#黒(茶色)から赤
+    #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])#黒(茶色)から緑
+    hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +160 ,hsv[:, :, 0])#黒(茶色)から赤
     bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
     cv2.imwrite(output_path,bgr)
     return True
