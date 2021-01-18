@@ -64,28 +64,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 
 
-def flex(event):
-    message = []
-    work = event.message.id
-    reply_work = event.reply_token
-    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    text_save_id(work)
-    text_save_reply(reply_work)
-    json_open = open('test.json', 'r')
-    json_data = json.load(json_open)
-    user_id = os.environ["USER_ID"]
-    
-    
-    messages = FlexSendMessage(alt_text="test", contents=json_data)
-    print("フレックスメッセージ中身: {}".format(messages))
-    if event.reply_token == "00000000000000000000000000000000":
-        return
-    if event.reply_token == "ffffffffffffffffffffffffffffffff":
-        return
-    
-    line_bot_api.reply_message(event.reply_token, messages)
-
-
 def handle_message(event):
     print("取得イヴェント:{}".format(event))
     print("取得イヴェントメッセージID:{}".format(event.message.id))
@@ -157,7 +135,7 @@ def handle_message(event):
         flex(event)
 
     elif event.message.text == ">>緑色変更" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
+        print("「緑」通過: {}".format(event.message.text))
 
         color = 1
         with open(path_w1) as f:
@@ -216,7 +194,26 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message6(work,event.reply_token,userId,color)
 
-  
+def flex(event):
+    message = []
+    work = event.message.id
+    reply_work = event.reply_token
+    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
+    text_save_id(work)
+    text_save_reply(reply_work)
+    json_open = open('test.json', 'r')
+    json_data = json.load(json_open)
+    user_id = os.environ["USER_ID"]
+    
+    
+    messages = FlexSendMessage(alt_text="test", contents=json_data)
+    print("フレックスメッセージ中身: {}".format(messages))
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+    
+    line_bot_api.reply_message(event.reply_token, messages)
 
     
 def text_save_id(work):
