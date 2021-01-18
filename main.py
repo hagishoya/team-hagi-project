@@ -199,8 +199,8 @@ def flex(event):
     work = event.message.id
     reply_work = event.reply_token
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    text_save_id(work)
-    text_save_reply(reply_work)
+    #text_save_id(work)
+    #text_save_reply(reply_work)
     json_open = open('test.json', 'r')
     json_data = json.load(json_open)
     user_id = os.environ["USER_ID"]
