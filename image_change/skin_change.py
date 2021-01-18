@@ -35,6 +35,12 @@ def skin_image(event,userid,color):
     #bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
     #cv2.imwrite(output_path,bgr)
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])
+    try:
+        print("hsv_2[:, :, 0]::{}".format(hsv_2[:, :, 0]))
+        print("hsv_2[:, :, 1]::{}".format(hsv_2[:, :, 1]))
+        print("hsv_2[:, :, 2]::{}".format(hsv_2[:, :, 2]))
+    
+
 
     if color == 1:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<255) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])#黒(茶色)から緑
