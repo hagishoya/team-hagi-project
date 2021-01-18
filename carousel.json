@@ -142,6 +142,41 @@
       } 
     },
     {
+         "type": "bubble",
+      "hero": {
+        "type": "image",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "cover",
+        "url": "https://team-hagi-project.herokuapp.com/static/illustration.jpg"
+      },
+      "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "text",
+            "text": "肌変更",
+            "wrap": true,
+            "align": "center",
+            "position": "relative",
+            "size": "md"
+          },
+          {
+            "type": "button",
+            "style": "primary",
+            "action": {
+              "type": "message",
+              "label": "変更",
+              "text": ">>肌変更"
+            },
+            "position": "relative"
+          }
+        ]
+      } 
+    },
+    {
           "type": "bubble",
       "hero": {
         "type": "image",
