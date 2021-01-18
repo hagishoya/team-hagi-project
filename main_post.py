@@ -99,7 +99,7 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message5(work,event.reply_token,userId)
 
-    
+
 def text_save_id(work):
     s = work
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD_text_saveID:{}".format(work))
