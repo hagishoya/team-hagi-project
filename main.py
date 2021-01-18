@@ -168,43 +168,53 @@ def handle_message(event):
 
     elif event.message.text == ">>青色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
+
+        color = 2
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId)
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
 
     elif event.message.text == ">>黄色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
+
+        color = 3
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId)
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
 
     elif event.message.text == ">>ピンク変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
+
+        color = 4
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId)
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
 
     elif event.message.text == ">>赤色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
+
+        color = 5
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId)
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
 
     elif event.message.text == ">>黒色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
+
+        color = 6
         with open(path_w1) as f:
             work = f.read()
         with open(path_w2) as f2:
             work1 = f2.read()
-        output_method.handle_send_message6(work,event.reply_token,userId)
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
 
   
 
