@@ -82,10 +82,10 @@ def flex(event):
         return
     if event.reply_token == "ffffffffffffffffffffffffffffffff":
         return
-        
-    line_bot_api.reply_message(event.reply_token, message)
-
     
+    line_bot_api.reply_message(event.reply_token, messages)
+
+
 def handle_message(event):
     print("取得イヴェント:{}".format(event))
     print("取得イヴェントメッセージID:{}".format(event.message.id))
