@@ -31,8 +31,8 @@ def skin_image(event,userid,color):
     hsv_6 = np.copy(hsv_5)
     hsv_7 = np.copy(hsv_6)
     
-    hsv_9 = np.copy(hsv_8)
-    hsv_10 = np.copy(hsv_9)
+    #hsv_9 = np.copy(hsv_8)
+    #hsv_10 = np.copy(hsv_9)
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 150,hsv[:, :, 0])
     #hsv_2[:, :, 2] = np.where((hsv[:, :, 2]>5) )
     #hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.5,hsv[:, :, 2])#金髪から黒髪
