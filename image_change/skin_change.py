@@ -30,7 +30,7 @@ def skin_image(event,userid,color):
     hsv_5 = np.copy(hsv_4)
     hsv_6 = np.copy(hsv_5)
     hsv_7 = np.copy(hsv_6)
-    hsv_8 = np.copy(hsv_7)
+    
     hsv_9 = np.copy(hsv_8)
     hsv_10 = np.copy(hsv_9)
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 150,hsv[:, :, 0])
@@ -53,9 +53,9 @@ def skin_image(event,userid,color):
         hsv_6[:, :, 2] = np.where((hsv_5[:, :, 2]>30) & (hsv_5[:, :, 2]<60) ,hsv_5[:, :, 2] + 120 ,hsv_5[:, :, 2])#150~180
         hsv_7[:, :, 2] = np.where((hsv_6[:, :, 2]>60) & (hsv_6[:, :, 2]<90) ,hsv_6[:, :, 2] + 100 ,hsv_6[:, :, 2])#160~190
 
-
+        hsv_8 = np.copy(hsv_7)
         #彩度をあげる
-        hsv_8[:, :, 2] = np.where((hsv_7[:, :, 2]>140) & (hsv_7[:, :, 2]<190) & (hsv_4[:, :, 2]>=0) & (hsv_4[:, :, 2]<30) ,hsv_7[:, :, 1] + 100 ,hsv_7[:, :, 1])
+        hsv_8[:, :, 1] = np.where((hsv_7[:, :, 2]>140) & (hsv_7[:, :, 2]<190) & (hsv_4[:, :, 2]>=0) & (hsv_4[:, :, 2]<30) ,hsv_7[:, :, 1] + 100 ,hsv_7[:, :, 1])
         #hsv_8[:, :, 1] = np.where((hsv_7[:, :, 2]>140) & (hsv_7[:, :, 2]<190) & (hsv_7[:, :, 1]<100) ,hsv_7[:, :, 1] + 100 ,hsv_7[:, :, 1])#& (hsv_4[:, :, 1]<20) 
         #hsv_9[:, :, 1] = np.where(((hsv_8[:, :, 2]>150) & (hsv_8[:, :, 2]<180)) & (hsv_8[:, :, 1]<100) ,hsv_8[:, :, 1] + 100,hsv_8[:, :, 1])
         #hsv_10[:, :, 1] = np.where(((hsv_9[:, :, 2]>160) & (hsv_9[:, :, 2]<190)) & (hsv_9[:, :, 1]<100) ,hsv_9[:, :, 1] + 100 ,hsv_9[:, :, 1])
