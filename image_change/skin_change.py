@@ -26,6 +26,7 @@ def skin_image(event,userid,color):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
     hsv_3 = np.copy(hsv_2)
+
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 150,hsv[:, :, 0])
     #hsv_2[:, :, 2] = np.where((hsv[:, :, 2]>5) )
     #hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.5,hsv[:, :, 2])#金髪から黒髪
@@ -38,8 +39,9 @@ def skin_image(event,userid,color):
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])
     if color == 1:
         hsv_2[:, :, 1] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 1] + 180 ,hsv[:, :, 1])#黒(茶色)から緑
-        hsv_3[:, :, 2] = np.where((hsv_2[:, :, 2]>0) & (hsv_2[:, :, 2]<128) ,hsv_2[:, :, 2] + 180 ,hsv_2[:, :, 2])
-       #hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 50,hsv[:, :, 0]) #緑
+        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 2]>0) & (hsv_2[:, :, 2]<128) ,hsv_2[:, :, 0] + 128 ,hsv_2[:, :, 0])
+        #hsv_3[:, :, 2] = np.where((hsv_2[:, :, 2]>0) & (hsv_2[:, :, 2]<128) ,hsv_2[:, :, 2] + 180 ,hsv_2[:, :, 2])#白
+        #hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 50,hsv[:, :, 0]) #緑
     elif color == 2:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>6) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] + 110,hsv[:, :, 0]) #青
     elif color == 3:
