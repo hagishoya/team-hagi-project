@@ -15,7 +15,7 @@ import random
 def skin_image(event,userid,color):
     image_path, output_path = path_data.get_image_path(event,userid)
 
- 
+
     img = cv2.imread(image_path)     # Load image
  
 
@@ -37,6 +37,7 @@ def skin_image(event,userid,color):
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])
     if color == 1:
         hsv_2[:, :, 1] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 1] + 180 ,hsv[:, :, 1])#黒(茶色)から緑
+        hsv_2[:, :, 2] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 2] + 180 ,hsv[:, :, 2])
        #hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 50,hsv[:, :, 0]) #緑
     elif color == 2:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>6) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] + 110,hsv[:, :, 0]) #青
