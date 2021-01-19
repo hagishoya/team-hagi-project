@@ -45,9 +45,9 @@ def skin_image(event,userid,color):
     #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])
     if color == 1:
         #色相を０に
-        #hsv_2[:, :, 2] = np.where((hsv[:, :, 2]>=0) & (hsv[:, :, 2]<30) ,hsv[:, :, 0] * 0 ,hsv[:, :, 0])
-        #hsv_3[:, :, 2] = np.where((hsv_2[:, :, 2]>30) & (hsv_2[:, :, 2]<60) ,hsv_2[:, :, 0] * 0 ,hsv_2[:, :, 0])#150~180
-        #hsv_4[:, :, 2] = np.where((hsv_3[:, :, 2]>60) & (hsv_3[:, :, 2]<90) ,hsv_3[:, :, 0] * 0 ,hsv_3[:, :, 0])#160~190
+        hsv_2[:, :, 2] = np.where((hsv[:, :, 2]>=0) & (hsv[:, :, 2]<30) ,hsv[:, :, 0] * 0 ,hsv[:, :, 0])
+        hsv_3[:, :, 2] = np.where((hsv_2[:, :, 2]>30) & (hsv_2[:, :, 2]<60) ,hsv_2[:, :, 0] * 0 ,hsv_2[:, :, 0])#150~180
+        hsv_4[:, :, 2] = np.where((hsv_3[:, :, 2]>60) & (hsv_3[:, :, 2]<90) ,hsv_3[:, :, 0] * 0 ,hsv_3[:, :, 0])#160~190
         #明度をあげる
         hsv_5[:, :, 2] = np.where((hsv_4[:, :, 2]>=0) & (hsv_4[:, :, 2]<30) ,hsv_4[:, :, 2] + 140 ,hsv_4[:, :, 2])#140~170
         hsv_6[:, :, 2] = np.where((hsv_5[:, :, 2]>30) & (hsv_5[:, :, 2]<60) ,hsv_5[:, :, 2] + 120 ,hsv_5[:, :, 2])#150~180
@@ -97,7 +97,7 @@ def skin_image(event,userid,color):
     #bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
     #----------------------------------------------------------------------------------------------------------------------
 
-    bgr = cv2.cvtColor(hsv_8, cv2.COLOR_HSV2BGR)
+    bgr = cv2.cvtColor(hsv_7, cv2.COLOR_HSV2BGR)
     cv2.imwrite(output_path, bgr)
 
 #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] + 176,hsv[:, :, 0]) #濃い茶色
