@@ -83,8 +83,8 @@ def handle_send_message4(event,reply,userid):
     #shutil.rmtree("static/" + userid)
 
 # # 髪の毛変更test
-def handle_send_message5(event,reply,userid):
-    result = hair_change.hair_image(event,userid)
+def handle_send_message5(event,reply,userid,color):
+    hair_change.hair_image(event,userid,color)
     reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
@@ -100,7 +100,7 @@ def handle_send_message5(event,reply,userid):
 
 
 def handle_send_message6(event,reply,userid,color):
-    skin_change.skin_image(event,userid,color)
+    skin_change2.skin_image2(event,userid,color)
     reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
