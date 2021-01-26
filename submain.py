@@ -113,28 +113,15 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message4(work,event.reply_token,userId)
     
-#----------------------------------------------------------------------------------------------------------
     #髪の毛test
-    elif event.message.text == ">>髪色変更" and os.path.exists("static/" + userId):
+    elif event.message.text == ">>test" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
-        #with open(path_w1) as f:
-        #    work = f.read()
-        #with open(path_w2) as f2:
-        #    work1 = f2.read()
-        #output_method.handle_send_message5(work,event.reply_token,userId)
-        flex2(event)
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message5(work,event.reply_token,userId)
 
-    elif event.message.text == ">>黒色" and os.path.exists("static/" + userId):
-        print("通過: {}".format(event.message.text))
-        #with open(path_w1) as f:
-        #    work = f.read()
-        #with open(path_w2) as f2:
-        #    work1 = f2.read()
-        #output_method.handle_send_message5(work,event.reply_token,userId)
-        flex3(event)
-    
-
-#----------------------------------------------------------------------------------------------------------
 
     #肌の色
     elif event.message.text == ">>肌変更" and os.path.exists("static/" + userId):
@@ -207,7 +194,6 @@ def handle_message(event):
             work1 = f2.read()
         output_method.handle_send_message6(work,event.reply_token,userId,color)
 
-
 def flex(event):
     message = []
     work = event.message.id
@@ -229,51 +215,12 @@ def flex(event):
     
     line_bot_api.reply_message(event.reply_token, messages)
 
-
-def flex2(event):
-    message = []
-    work = event.message.id
-    reply_work = event.reply_token
-    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    json_open = open('hair_change_myself.json', 'r')
-    json_data = json.load(json_open)
-    user_id = os.environ["USER_ID"]
     
-    messages = FlexSendMessage(alt_text="test", contents=json_data)
-    print("フレックスメッセージ中身: {}".format(messages))
-    if event.reply_token == "00000000000000000000000000000000":
-        return
-    if event.reply_token == "ffffffffffffffffffffffffffffffff":
-        return
-    
-    line_bot_api.reply_message(event.reply_token, messages)
-
-
-def flex3(event):
-    message = []
-    print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    json_open = open('hair_change.json', 'r')
-    json_data = json.load(json_open)
-    user_id = os.environ["USER_ID"]
-
-    messages = FlexSendMessage(alt_text="test", contents=json_data)
-    print("フレックスメッセージ中身: {}".format(messages))
-    if event.reply_token == "00000000000000000000000000000000":
-        return
-    if event.reply_token == "ffffffffffffffffffffffffffffffff":
-        return
-    
-    line_bot_api.reply_message(event.reply_token, messages)
-    
-
-
 def text_save_id(work):
     s = work
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD_text_saveID:{}".format(work))
     with open(path_w1, mode='w') as f:
         f.write(s)
-
-
 
 def text_save_reply(work):
     s = work
