@@ -117,31 +117,138 @@ def handle_message(event):
     #髪の毛test
     elif event.message.text == ">>髪色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
-        #with open(path_w1) as f:
-        #    work = f.read()
-        #with open(path_w2) as f2:
-        #    work1 = f2.read()
-        #output_method.handle_send_message5(work,event.reply_token,userId)
         flex2(event)
 
     elif event.message.text == ">>黒色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
-        #with open(path_w1) as f:
-        #    work = f.read()
-        #with open(path_w2) as f2:
-        #    work1 = f2.read()
-        #output_method.handle_send_message5(work,event.reply_token,userId)
-        flex3(event)
+        flex_black(event)
 
     elif event.message.text == ">>茶色変更" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
-        #with open(path_w1) as f:
-        #    work = f.read()
-        #with open(path_w2) as f2:
-        #    work1 = f2.read()
-        #output_method.handle_send_message5(work,event.reply_token,userId)
-        flex4(event)
+        flex_cha(event)
 
+    elif event.message.text == ">>黒色から緑色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 1
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+
+    elif event.message.text == ">>黒色から青色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 2
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+
+    elif event.message.text == ">>黒色から黄色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 3
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+    
+    elif event.message.text == ">>黒色からピンク変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 4
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+    
+    elif event.message.text == ">>黒色から赤色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 5
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+    
+    elif event.message.text == ">>黒色から茶色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 6
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message6(work,event.reply_token,userId,color)
+
+
+    
+    elif event.message.text == ">>茶色から緑色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 1
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message7(work,event.reply_token,userId,color)
+    
+    elif event.message.text == ">>茶色から青色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 2
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message7(work,event.reply_token,userId,color)
+
+    elif event.message.text == ">>茶色から黄色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 3
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message7(work,event.reply_token,userId,color)
+    
+    elif event.message.text == ">>茶色からピンク変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 4
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message7(work,event.reply_token,userId,color)
+    
+    elif event.message.text == ">>茶色から赤色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 5
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message7(work,event.reply_token,userId,color)
+    
+    elif event.message.text == ">>茶色から黒色変更" and os.path.exists("static/" + userId):
+        print("「緑」通過: {}".format(event.message.text))
+
+        color = 6
+        with open(path_w1) as f:
+            work = f.read()
+        with open(path_w2) as f2:
+            work1 = f2.read()
+        output_method.handle_send_message7(work,event.reply_token,userId,color)
+    
 
 #----------------------------------------------------------------------------------------------------------
 
@@ -258,7 +365,7 @@ def flex2(event):
     line_bot_api.reply_message(event.reply_token, messages)
 
 
-def flex3(event):
+def flex_black(event):
     messages = []
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
     json_open = open('hair_change.json', 'r')
@@ -275,10 +382,10 @@ def flex3(event):
     line_bot_api.reply_message(event.reply_token, messages)
 
 
-def flex4(event):
+def flex_cha(event):
     messages = []
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
-    json_open = open('hair_change.json', 'r')
+    json_open = open('hair_change2.json', 'r')
     json_data = json.load(json_open)
     user_id = os.environ["USER_ID"]
 

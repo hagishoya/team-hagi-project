@@ -38,7 +38,7 @@
         "action": {
           "type": "message",
           "label": "緑色変更",
-          "text": ">>黒色から緑色変更"
+          "text": ">>茶色から緑色変更"
         },
         "flex": 5
       },
@@ -49,7 +49,7 @@
         "action": {
           "type": "message",
           "label": "青色変更",
-          "text": ">>黒色から青色変更"
+          "text": ">>茶色から青色変更"
         },
         "flex": 5
       },
@@ -60,7 +60,7 @@
         "action": {
           "type": "message",
           "label": "黄色変更",
-          "text": ">>黒色から黄色変更"
+          "text": ">>茶色から黄色変更"
         },
         "flex": 5
       },
@@ -71,7 +71,7 @@
         "action": {
           "type": "message",
           "label": "ピンク変更",
-          "text": ">>黒色からピンク変更"
+          "text": ">>茶色からピンク変更"
         },
         "flex": 5
       },
@@ -82,7 +82,7 @@
         "action": {
           "type": "message",
           "label": "赤色変更",
-          "text": ">>黒色から赤色変更"
+          "text": ">>茶色から赤色変更"
         },
         "flex": 5
       },
@@ -92,8 +92,8 @@
         "height": "sm",
         "action": {
           "type": "message",
-          "label": "茶色変更",
-          "text": ">>黒色から茶色変更"
+          "label": "黒色変更",
+          "text": ">>茶色から黒色変更"
         },
         "flex": 5
       },
