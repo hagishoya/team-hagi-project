@@ -100,7 +100,7 @@ def handle_send_message5(event,reply,userid,color):
 
 
 def handle_send_message6(event,reply,userid,color):
-    skin_change2.skin_image2(event,userid,color)
+    skin_change.skin_image(event,userid,color)
     reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
@@ -112,7 +112,7 @@ def handle_send_message6(event,reply,userid,color):
     main.line_bot_api.reply_message(reply,message)
 
 def handle_send_message7(event,reply,userid,color):
-    skin_change.skin_image(event,userid,color)
+    skin_change2.skin_image2(event,userid,color)
     reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
