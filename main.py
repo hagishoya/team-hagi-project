@@ -218,7 +218,7 @@ def handle_message(event):
 
 
 def flex(event):
-    message = []
+    messages = []
     work = event.message.id
     reply_work = event.reply_token
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
@@ -240,7 +240,7 @@ def flex(event):
 
 
 def flex2(event):
-    message = []
+    messages = []
     work = event.message.id
     reply_work = event.reply_token
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
@@ -259,7 +259,7 @@ def flex2(event):
 
 
 def flex3(event):
-    message = []
+    messages = []
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
     json_open = open('hair_change.json', 'r')
     json_data = json.load(json_open)
@@ -276,7 +276,7 @@ def flex3(event):
 
 
 def flex4(event):
-    message = []
+    messages = []
     print("取得イヴェントメッセージIDDDDDDDDDDDDDDDD:{}".format(work))
     json_open = open('hair_change.json', 'r')
     json_data = json.load(json_open)
