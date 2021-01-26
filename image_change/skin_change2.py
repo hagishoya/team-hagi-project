@@ -48,7 +48,7 @@ def skin_image2(event,userid,color):
         hsv_2[:, :, 1] = np.where((hsv[:, :, 0]>=176) ,hsv[:, :, 1] + 96 ,hsv[:, :, 1])
     elif color == 5:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>6) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] *0.001,hsv[:, :, 0]) #赤色
-        hsv_3[:, :, 2] = np.where((hsv_2[:, :, 2]>6) & (hsv_2[:, :, 2]<128) ,hsv_2[:, :, 2] + 128,hsv_2[:, :, 2]) #赤色
+        hsv_3[:, :, 2] = np.where((hsv_2[:, :, 2]>6) & (hsv_2[:, :, 2]<128) ,hsv_2[:, :, 2] + 30,hsv_2[:, :, 2]) #赤色
     elif color == 6:
         hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.4,hsv[:, :, 2]) #黒色
         hsv_2[:, :, 2] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 1] *0.7,hsv_2[:, :, 2]) #黒色
