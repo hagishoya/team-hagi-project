@@ -18,11 +18,6 @@ def skin_image(event,userid,color):
 
     img = cv2.imread(image_path)     # Load image
  
-
- 
-    #height = img.shape[0]
-    #width = img.shape[1]
-    #img2 = cv2.resize(img , (int(width*0.5), int(height*0.5)))
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV) # BGR->HSV変換
     hsv_2 = np.copy(hsv)
     hsv_3 = np.copy(hsv_2)
@@ -33,23 +28,66 @@ def skin_image(event,userid,color):
     hsv_8 = np.copy(hsv_7)
     hsv_9 = np.copy(hsv_8)
     hsv_10 = np.copy(hsv_9)
-    #hsv_2[:, :, 0] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 0] + 150,hsv[:, :, 0])
-    #hsv_2[:, :, 2] = np.where((hsv[:, :, 2]>5) )
-    #hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.5,hsv[:, :, 2])#金髪から黒髪
-    #hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>5) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.5,hsv[:, :, 2])
-    #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +110 ,hsv[:, :, 0])#黒(茶色)から青
-    #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])#黒(茶色)から緑
-    #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +160 ,hsv[:, :, 0])#黒(茶色)から赤
-    #bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
-    #cv2.imwrite(output_path,bgr)
-    #hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>0) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] +50 ,hsv[:, :, 0])
+
+
     if color == 1:
-        #色相を０に
-        c = 100
-        change_color(c)
+        hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>=0) & (hsv[:, :, 2]<30) ,hsv[:, :, 0] *0.001 ,hsv[:, :, 0])
+        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 2]>30) & (hsv_2[:, :, 2]<60) ,hsv_2[:, :, 0] *0.001 ,hsv_2[:, :, 0])#150~180
+        hsv_4[:, :, 0] = np.where((hsv_3[:, :, 2]>60) & (hsv_3[:, :, 2]<90) ,hsv_3[:, :, 0] *0.001 ,hsv_3[:, :, 0])#160~190
+        
+        #彩度を上げる
+        hsv_5[:, :, 1] = np.where((hsv_4[:, :, 2]>=0) & (hsv_4[:, :, 2]<30) ,hsv_4[:, :, 1] + 200 ,hsv_4[:, :, 1])
+        hsv_6[:, :, 1] = np.where((hsv_5[:, :, 2]>30) & (hsv_5[:, :, 2]<60) ,hsv_5[:, :, 1] + 200 ,hsv_5[:, :, 1])
+        hsv_7[:, :, 1] = np.where((hsv_6[:, :, 2]>60) & (hsv_6[:, :, 2]<100) ,hsv_6[:, :, 1] + 200 ,hsv_6[:, :, 1])
+
+        
+        #色相を上げる
+        hsv_8[:, :, 0] = np.where((hsv_7[:, :, 2]>=0) & (hsv_7[:, :, 2]<30) ,hsv_7[:, :, 0] + 100 ,hsv_7[:, :, 0])
+        hsv_9[:, :, 0] = np.where((hsv_8[:, :, 2]>30) & (hsv_8[:, :, 2]<60) ,hsv_8[:, :, 0] + 100 ,hsv_8[:, :, 0])#150~180
+        hsv_10[:, :, 0] = np.where((hsv_9[:, :, 2]>60) & (hsv_9[:, :, 2]<100) ,hsv_9[:, :, 0]+100 ,hsv_9[:, :, 0])#160~190
+
+
+        #明度を上げる
+        hsv_11 = np.copy(hsv_10)
+        hsv_11[:, :, 2] = np.where((hsv_8[:, :, 2]>=0) & (hsv_8[:, :, 2]<30) ,hsv_8[:, :, 2] + 90 ,hsv_8[:, :, 2])#140~170
+        
+        hsv_12 = np.copy(hsv_11)
+        hsv_12[:, :, 2] = np.where((hsv_11[:, :, 2]>30) & (hsv_11[:, :, 2]<60) ,hsv_11[:, :, 2] + 90 ,hsv_11[:, :, 2])#150~180
+
+        hsv_13 = np.copy(hsv_12)
+        hsv_13[:, :, 2] = np.where((hsv_12[:, :, 2]>60) & (hsv_12[:, :, 2]<100) ,hsv_12[:, :, 2] + 90 ,hsv_12[:, :, 2])#160~190
+        bgr = cv2.cvtColor(hsv_13, cv2.COLOR_HSV2BGR)
+        cv2.imwrite(output_path, bgr)
+
+        
     elif color == 2:
-        c = 50
-        change_color(c)#青
+        hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>=0) & (hsv[:, :, 2]<30) ,hsv[:, :, 0] *0.001 ,hsv[:, :, 0])
+        hsv_3[:, :, 0] = np.where((hsv_2[:, :, 2]>30) & (hsv_2[:, :, 2]<60) ,hsv_2[:, :, 0] *0.001 ,hsv_2[:, :, 0])#150~180
+        hsv_4[:, :, 0] = np.where((hsv_3[:, :, 2]>60) & (hsv_3[:, :, 2]<90) ,hsv_3[:, :, 0] *0.001 ,hsv_3[:, :, 0])#160~190
+        
+        #彩度を上げる
+        hsv_5[:, :, 1] = np.where((hsv_4[:, :, 2]>=0) & (hsv_4[:, :, 2]<30) ,hsv_4[:, :, 1] + 200 ,hsv_4[:, :, 1])
+        hsv_6[:, :, 1] = np.where((hsv_5[:, :, 2]>30) & (hsv_5[:, :, 2]<60) ,hsv_5[:, :, 1] + 200 ,hsv_5[:, :, 1])
+        hsv_7[:, :, 1] = np.where((hsv_6[:, :, 2]>60) & (hsv_6[:, :, 2]<100) ,hsv_6[:, :, 1] + 200 ,hsv_6[:, :, 1])
+
+        
+        #色相を上げる
+        hsv_8[:, :, 0] = np.where((hsv_7[:, :, 2]>=0) & (hsv_7[:, :, 2]<30) ,hsv_7[:, :, 0] + 50 ,hsv_7[:, :, 0])
+        hsv_9[:, :, 0] = np.where((hsv_8[:, :, 2]>30) & (hsv_8[:, :, 2]<60) ,hsv_8[:, :, 0] + 50 ,hsv_8[:, :, 0])#150~180
+        hsv_10[:, :, 0] = np.where((hsv_9[:, :, 2]>60) & (hsv_9[:, :, 2]<100) ,hsv_9[:, :, 0]+50 ,hsv_9[:, :, 0])#160~190
+
+
+        #明度を上げる
+        hsv_11 = np.copy(hsv_10)
+        hsv_11[:, :, 2] = np.where((hsv_8[:, :, 2]>=0) & (hsv_8[:, :, 2]<30) ,hsv_8[:, :, 2] + 90 ,hsv_8[:, :, 2])#140~170
+        
+        hsv_12 = np.copy(hsv_11)
+        hsv_12[:, :, 2] = np.where((hsv_11[:, :, 2]>30) & (hsv_11[:, :, 2]<60) ,hsv_11[:, :, 2] + 90 ,hsv_11[:, :, 2])#150~180
+
+        hsv_13 = np.copy(hsv_12)
+        hsv_13[:, :, 2] = np.where((hsv_12[:, :, 2]>60) & (hsv_12[:, :, 2]<100) ,hsv_12[:, :, 2] + 90 ,hsv_12[:, :, 2])#160~190
+        bgr = cv2.cvtColor(hsv_13, cv2.COLOR_HSV2BGR)
+        cv2.imwrite(output_path, bgr)
     elif color == 3:
         hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>6) & (hsv[:, :, 2]<128) ,hsv[:, :, 0] + 20,hsv[:, :, 0]) #黄色
     elif color == 4:
@@ -65,35 +103,9 @@ def skin_image(event,userid,color):
 
 
 
-def change_color(c):
-
-    hsv_2[:, :, 0] = np.where((hsv[:, :, 2]>=0) & (hsv[:, :, 2]<30) ,hsv[:, :, 0] *0.001 ,hsv[:, :, 0])
-    hsv_3[:, :, 0] = np.where((hsv_2[:, :, 2]>30) & (hsv_2[:, :, 2]<60) ,hsv_2[:, :, 0] *0.001 ,hsv_2[:, :, 0])#150~180
-    hsv_4[:, :, 0] = np.where((hsv_3[:, :, 2]>60) & (hsv_3[:, :, 2]<90) ,hsv_3[:, :, 0] *0.001 ,hsv_3[:, :, 0])#160~190
-        
-        #彩度を上げる
-    hsv_5[:, :, 1] = np.where((hsv_4[:, :, 2]>=0) & (hsv_4[:, :, 2]<30) ,hsv_4[:, :, 1] + 200 ,hsv_4[:, :, 1])
-    hsv_6[:, :, 1] = np.where((hsv_5[:, :, 2]>30) & (hsv_5[:, :, 2]<60) ,hsv_5[:, :, 1] + 200 ,hsv_5[:, :, 1])
-    hsv_7[:, :, 1] = np.where((hsv_6[:, :, 2]>60) & (hsv_6[:, :, 2]<100) ,hsv_6[:, :, 1] + 200 ,hsv_6[:, :, 1])
-
-        
-        #色相を上げる
-    hsv_8[:, :, 0] = np.where((hsv_7[:, :, 2]>=0) & (hsv_7[:, :, 2]<30) ,hsv_7[:, :, 0] + c ,hsv_7[:, :, 0])
-    hsv_9[:, :, 0] = np.where((hsv_8[:, :, 2]>30) & (hsv_8[:, :, 2]<60) ,hsv_8[:, :, 0] + c ,hsv_8[:, :, 0])#150~180
-    hsv_10[:, :, 0] = np.where((hsv_9[:, :, 2]>60) & (hsv_9[:, :, 2]<100) ,hsv_9[:, :, 0]+c ,hsv_9[:, :, 0])#160~190
 
 
-        #明度を上げる
-    hsv_11 = np.copy(hsv_10)
-    hsv_11[:, :, 2] = np.where((hsv_8[:, :, 2]>=0) & (hsv_8[:, :, 2]<30) ,hsv_8[:, :, 2] + 90 ,hsv_8[:, :, 2])#140~170
-        
-    hsv_12 = np.copy(hsv_11)
-    hsv_12[:, :, 2] = np.where((hsv_11[:, :, 2]>30) & (hsv_11[:, :, 2]<60) ,hsv_11[:, :, 2] + 90 ,hsv_11[:, :, 2])#150~180
 
-    hsv_13 = np.copy(hsv_12)
-    hsv_13[:, :, 2] = np.where((hsv_12[:, :, 2]>60) & (hsv_12[:, :, 2]<100) ,hsv_12[:, :, 2] + 90 ,hsv_12[:, :, 2])#160~190
-    bgr = cv2.cvtColor(hsv_13, cv2.COLOR_HSV2BGR)
-    cv2.imwrite(output_path, bgr)
 
 
     #茶色から指定色-----------------------------------------------------------------------------------------------------------
