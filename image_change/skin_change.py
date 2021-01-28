@@ -80,8 +80,8 @@ def skin_image(event,userid,color):
         hsv_5[:, :, 1] = np.where((hsv_4[:, :, 2]>=0) & (hsv_4[:, :, 2]<30) ,hsv_4[:, :, 1] + 200 ,hsv_4[:, :, 1])
         hsv_6[:, :, 1] = np.where((hsv_5[:, :, 2]>30) & (hsv_5[:, :, 2]<60) ,hsv_5[:, :, 1] + 200 ,hsv_5[:, :, 1])
         hsv_7[:, :, 1] = np.where((hsv_6[:, :, 2]>60) & (hsv_6[:, :, 2]<100) ,hsv_6[:, :, 1] + 200 ,hsv_6[:, :, 1])
-        hsv_8[:, :, 0] = np.where((hsv_7[:, :, 2]>=0) & (hsv_7[:, :, 2]<30) ,hsv_7[:, :, 0] +40 ,hsv_7[:, :, 0])
-        hsv_9[:, :, 0] = np.where((hsv_8[:, :, 2]>30) & (hsv_8[:, :, 2]<60) ,hsv_8[:, :, 0] +40 ,hsv_8[:, :, 0])
+        hsv_8[:, :, 0] = np.where((hsv_7[:, :, 2]>=0) & (hsv_7[:, :, 2]<30) ,hsv_7[:, :, 0] + 0 ,hsv_7[:, :, 0])
+        hsv_9[:, :, 0] = np.where((hsv_8[:, :, 2]>30) & (hsv_8[:, :, 2]<60) ,hsv_8[:, :, 0] + 0 ,hsv_8[:, :, 0])
         hsv_11[:, :, 2] = np.where((hsv_9[:, :, 2]>=0) & (hsv_9[:, :, 2]<60) ,hsv_9[:, :, 2] + 90 ,hsv_9[:, :, 2])
         bgr = cv2.cvtColor(hsv_11, cv2.COLOR_HSV2BGR)
         cv2.imwrite(output_path, bgr)#黄色
@@ -105,8 +105,8 @@ def skin_image(event,userid,color):
         hsv_5[:, :, 1] = np.where((hsv_4[:, :, 2]>=0) & (hsv_4[:, :, 2]<30) ,hsv_4[:, :, 1] + 200 ,hsv_4[:, :, 1])
         hsv_6[:, :, 1] = np.where((hsv_5[:, :, 2]>30) & (hsv_5[:, :, 2]<60) ,hsv_5[:, :, 1] + 200 ,hsv_5[:, :, 1])
         hsv_7[:, :, 1] = np.where((hsv_6[:, :, 2]>60) & (hsv_6[:, :, 2]<100) ,hsv_6[:, :, 1] + 200 ,hsv_6[:, :, 1])
-        hsv_8[:, :, 0] = np.where((hsv_7[:, :, 2]>=0) & (hsv_7[:, :, 2]<30) ,hsv_7[:, :, 0] +40 ,hsv_7[:, :, 0])
-        hsv_9[:, :, 0] = np.where((hsv_8[:, :, 2]>30) & (hsv_8[:, :, 2]<60) ,hsv_8[:, :, 0] +40 ,hsv_8[:, :, 0])
+        hsv_8[:, :, 0] = np.where((hsv_7[:, :, 2]>=0) & (hsv_7[:, :, 2]<30) ,hsv_7[:, :, 0] - 30 ,hsv_7[:, :, 0])
+        hsv_9[:, :, 0] = np.where((hsv_8[:, :, 2]>30) & (hsv_8[:, :, 2]<60) ,hsv_8[:, :, 0] - 30 ,hsv_8[:, :, 0])
         hsv_11[:, :, 2] = np.where((hsv_9[:, :, 2]>=0) & (hsv_9[:, :, 2]<60) ,hsv_9[:, :, 2] + 90 ,hsv_9[:, :, 2])
         bgr = cv2.cvtColor(hsv_11, cv2.COLOR_HSV2BGR)
         cv2.imwrite(output_path, bgr) #赤色
