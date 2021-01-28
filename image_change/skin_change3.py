@@ -56,7 +56,7 @@ def skin_image(event,userid,color):
 
         hsv_13 = np.copy(hsv_12)
         hsv_13[:, :, 2] = np.where((hsv_12[:, :, 2]>60) & (hsv_12[:, :, 2]<100) ,hsv_12[:, :, 2] + 90 ,hsv_12[:, :, 2])#160~190
-        bgr = cv2.cvtColor(hsv_12, cv2.COLOR_HSV2BGR)
+        bgr = cv2.cvtColor(hsv_11, cv2.COLOR_HSV2BGR)
         cv2.imwrite(output_path, bgr)
 
 
