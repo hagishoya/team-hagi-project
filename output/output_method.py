@@ -2,7 +2,7 @@ from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, ImageMessage, FlexSendMessage,CarouselContainer,BubbleContainer
-from image_change import mosic_change, art_change, dot_change, illust_change, hair_change, skin_change,skin_change2
+from image_change import mosic_change, art_change, dot_change, illust_change, hair_change, skin_change,skin_change2,skin_change3
 import main
 import shutil
 import json
@@ -100,7 +100,7 @@ def handle_send_message5(event,reply,userid,color):
 
 
 def handle_send_message6(event,reply,userid,color):
-    skin_change.skin_image(event,userid,color)
+    skin_change3.skin_image(event,userid,color)
     reply = str(reply)
     print("通過チェック画像：{}".format(main.FQDN + "/static/" + userid + "/" + event + "_face.jpg"))
     message = []
