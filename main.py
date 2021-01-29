@@ -119,11 +119,11 @@ def handle_message(event):
         print("通過: {}".format(event.message.text))
         flex2(event)
 
-    elif event.message.text == ">>黒色変更" and os.path.exists("static/" + userId):
+    elif event.message.text == ">>黒色" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
         flex_black(event)
 
-    elif event.message.text == ">>茶色変更" and os.path.exists("static/" + userId):
+    elif event.message.text == ">>茶色" and os.path.exists("static/" + userId):
         print("通過: {}".format(event.message.text))
         flex_cha(event)
 
