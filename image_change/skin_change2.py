@@ -59,8 +59,8 @@ def skin_image2(event,userid,color):
         bgr = cv2.cvtColor(hsv_2, cv2.COLOR_HSV2BGR)
         cv2.imwrite(output_path, bgr)
     elif color == 6:
-        hsv_2[:, :, 2] = np.where((hsv[:, :, 0]>6) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] *0.4,hsv[:, :, 2]) #黒色
-        hsv_3[:, :, 2] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 1] *0.7,hsv_2[:, :, 2]) #黒色
+        hsv_2[:, :, 1] = np.where((hsv[:, :, 0]>=0) & (hsv[:, :, 0]<30) ,hsv[:, :, 2] * 0,hsv[:, :, 1]) #黒色
+        hsv_3[:, :, 2] = np.where((hsv_2[:, :, 0]>6) & (hsv_2[:, :, 0]<30) ,hsv_2[:, :, 0] *0,hsv_2[:, :, 0]) #黒色
         bgr = cv2.cvtColor(hsv_3, cv2.COLOR_HSV2BGR)
         cv2.imwrite(output_path, bgr)
     #0.001 赤
